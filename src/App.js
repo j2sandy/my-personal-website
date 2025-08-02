@@ -422,6 +422,15 @@ export default function PersonalWebsite() {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8">
         <div className="container mx-auto px-6 text-center">
-          <p className="mb-4">Â© 2024 John Doe. Built with React and Tailwind CSS.</p>
+          <p className="mb-4">© 2024 John Doe. Built with React and Tailwind CSS.</p>
           <div className="flex justify-center space-x-6">
-            <a href
+            <a href="#" className="hover:text-blue-400 transition-colors">GitHub</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">LinkedIn</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">Twitter</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">Email</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
