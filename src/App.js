@@ -18,9 +18,9 @@ export default function PersonalWebsite() {
       <div className="container mx-auto px-6 py-20">
         <div className="text-center">
           <div className="w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mx-auto mb-8 flex items-center justify-center">
-            <span className="text-4xl font-bold text-white">JD</span>
+            <span className="text-4xl font-bold text-white">NS</span>
           </div>
-          <h1 className="text-5xl font-bold text-gray-800 mb-4">John Doe</h1>
+          <h1 className="text-5xl font-bold text-gray-800 mb-4">Nitin Shandilya</h1>
           <p className="text-xl text-gray-600 mb-8">Creative Developer & Lifelong Learner</p>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
             Welcome to my digital space! I'm passionate about technology, continuous learning, 
@@ -422,7 +422,7 @@ export default function PersonalWebsite() {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8">
         <div className="container mx-auto px-6 text-center">
-          <p className="mb-4">© 2024 John Doe. Built with React and Tailwind CSS.</p>
+          <p className="mb-4">© 2025 Nitin Shandilya. Built with React and Tailwind CSS.</p>
           <div className="flex justify-center space-x-6">
             <a href="https://github.com/j2sandy" className="hover:text-blue-400 transition-colors">GitHub</a>
           </div>
