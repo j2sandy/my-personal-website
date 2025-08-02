@@ -424,10 +424,7 @@ export default function PersonalWebsite() {
         <div className="container mx-auto px-6 text-center">
           <p className="mb-4">© 2024 John Doe. Built with React and Tailwind CSS.</p>
           <div className="flex justify-center space-x-6">
-            <a href="#" className="hover:text-blue-400 transition-colors">GitHub</a>
-            <a href="#" className="hover:text-blue-400 transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-blue-400 transition-colors">Twitter</a>
-            <a href="#" className="hover:text-blue-400 transition-colors">Email</a>
+            <a href="https://github.com/j2sandy" className="hover:text-blue-400 transition-colors">GitHub</a>
           </div>
         </div>
       </footer>
