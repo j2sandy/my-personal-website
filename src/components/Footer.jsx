@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, FileText } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Footer({ darkMode }) {
   const socialLinks = [
@@ -22,15 +22,6 @@ export default function Footer({ darkMode }) {
     }
   ];
 
-  const additionalLinks = [
-    {
-      name: 'Resume',
-      url: '/resume.pdf',
-      icon: FileText,
-      hoverColor: 'hover:text-blue-400'
-    }
-  ];
-
   return (
     <footer className={`py-8 transition-colors duration-300 border-t ${
       darkMode 
@@ -38,7 +29,7 @@ export default function Footer({ darkMode }) {
         : 'bg-white text-gray-800 border-gray-200'
     }`}>
       <div className="container mx-auto px-6 text-center">
-        <p className="mb-4">© 2025 Nitin Shandilya. Built with React and Tailwind CSS.</p>
+        <p className="mb-6">© 2025 Nitin Shandilya. Built with React and Tailwind CSS.</p>
         
         {/* Social Links */}
         <div className="flex justify-center space-x-6 mb-6">
@@ -60,35 +51,13 @@ export default function Footer({ darkMode }) {
           })}
         </div>
         
-        {/* Additional Links */}
-        <div className={`pt-4 border-t ${
-          darkMode ? 'border-gray-700' : 'border-gray-200'
+        {/* Call to Action */}
+        <p className={`text-sm ${
+          darkMode ? 'text-gray-400' : 'text-gray-600'
         }`}>
-          <p className={`text-sm mb-4 ${
-            darkMode ? 'text-gray-400' : 'text-gray-600'
-          }`}>
-            Open to collaboration and interesting projects
-          </p>
-          <div className="flex justify-center space-x-4">
-            {additionalLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 ${link.hoverColor}`}
-                  aria-label={`${link.name}`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span className="text-sm">{link.name}</span>
-                </a>
-              );
-            })}
-          </div>
-        </div>
+          Open to collaboration and interesting projects
+        </p>
       </div>
     </footer>
   );
-                }
+}
