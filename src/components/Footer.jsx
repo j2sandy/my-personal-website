@@ -50,13 +50,6 @@ export default function Footer({ darkMode }) {
             );
           })}
         </div>
-        
-        {/* Call to Action */}
-        <p className={`text-sm ${
-          darkMode ? 'text-gray-400' : 'text-gray-600'
-        }`}>
-          Open to collaboration and interesting projects
-        </p>
       </div>
     </footer>
   );
