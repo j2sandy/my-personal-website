@@ -1,4 +1,4 @@
-import { Menu, X, Moon, Sun } from 'lucide-react';
+import { Menu, X, Moon, Sun, FileText } from 'lucide-react';
 
 export default function Navigation({
   navigation,
@@ -45,6 +45,21 @@ export default function Navigation({
               );
             })}
             
+            {/* Resume Button */}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
+                darkMode
+                  ? 'bg-blue-600 text-white hover:bg-blue-700'
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+              }`}
+            >
+              <FileText className="w-4 h-4" />
+              <span>Resume</span>
+            </a>
+
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
@@ -61,6 +76,21 @@ export default function Navigation({
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
+            {/* Mobile Resume Button */}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-2 rounded-md transition-colors duration-300 ${
+                darkMode
+                  ? 'text-blue-400 hover:text-blue-300 hover:bg-gray-800'
+                  : 'text-blue-600 hover:text-blue-700 hover:bg-gray-100'
+              }`}
+              aria-label="Download Resume"
+            >
+              <FileText className="w-5 h-5" />
+            </a>
+
             {/* Mobile Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
@@ -115,6 +145,22 @@ export default function Navigation({
                   </button>
                 );
               })}
+
+              {/* Mobile Resume Button - Full Width */}
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center justify-center space-x-2 w-full px-3 py-3 mt-4 rounded-md text-base font-medium transition-colors duration-300 ${
+                  darkMode
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
+              >
+                <FileText className="w-5 h-5" />
+                <span>Download Resume</span>
+              </a>
             </div>
           </div>
         )}
