@@ -10,19 +10,13 @@ export default function Footer({ darkMode }) {
     },
     {
       name: 'LinkedIn',
-      url: 'https://linkedin.com/in/nitinshandilya',
+      url: 'https://linkedin.com/in/nitin-shandilya-2b6003a3/',
       icon: Linkedin,
       hoverColor: 'hover:text-blue-400'
     },
     {
-      name: 'Twitter',
-      url: 'https://twitter.com/nitinshandilya',
-      icon: Twitter,
-      hoverColor: 'hover:text-sky-400'
-    },
-    {
       name: 'Email',
-      url: 'mailto:nitin.shandilya@example.com',
+      url: 'mailto:nitinbinay734@gmail.com',
       icon: Mail,
       hoverColor: 'hover:text-green-400'
     }
