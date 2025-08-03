@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, FileText } from 'lucide-react';
 
 export default function Footer({ darkMode }) {
   const socialLinks = [
@@ -22,13 +22,26 @@ export default function Footer({ darkMode }) {
     }
   ];
 
+  const additionalLinks = [
+    {
+      name: 'Resume',
+      url: '/resume.pdf',
+      icon: FileText,
+      hoverColor: 'hover:text-blue-400'
+    }
+  ];
+
   return (
-    <footer className={`py-8 transition-colors duration-300 ${
-      darkMode ? 'bg-gray-900 text-white border-t border-gray-700' : 'bg-gray-800 text-white'
+    <footer className={`py-8 transition-colors duration-300 border-t ${
+      darkMode 
+        ? 'bg-gray-900 text-white border-gray-700' 
+        : 'bg-white text-gray-800 border-gray-200'
     }`}>
       <div className="container mx-auto px-6 text-center">
         <p className="mb-4">© 2025 Nitin Shandilya. Built with React and Tailwind CSS.</p>
-        <div className="flex justify-center space-x-6">
+        
+        {/* Social Links */}
+        <div className="flex justify-center space-x-6 mb-6">
           {socialLinks.map((link) => {
             const Icon = link.icon;
             return (
@@ -47,43 +60,35 @@ export default function Footer({ darkMode }) {
           })}
         </div>
         
-        {/* Additional Contact Info */}
-        <div className={`mt-6 pt-4 border-t ${
-          darkMode ? 'border-gray-700' : 'border-gray-600'
+        {/* Additional Links */}
+        <div className={`pt-4 border-t ${
+          darkMode ? 'border-gray-700' : 'border-gray-200'
         }`}>
-          <p className={`text-sm ${
-            darkMode ? 'text-gray-400' : 'text-gray-300'
+          <p className={`text-sm mb-4 ${
+            darkMode ? 'text-gray-400' : 'text-gray-600'
           }`}>
             Open to collaboration and interesting projects
           </p>
-          <div className="flex justify-center space-x-4 mt-2">
-            <a
-              href="https://nitinshandilya.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm hover:text-blue-400 transition-colors duration-300"
-            >
-              Portfolio
-            </a>
-            <span className={`text-sm ${darkMode ? 'text-gray-600' : 'text-gray-500'}`}>•</span>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm hover:text-blue-400 transition-colors duration-300"
-            >
-              Resume
-            </a>
-            <span className={`text-sm ${darkMode ? 'text-gray-600' : 'text-gray-500'}`}>•</span>
-            <a
-              href="tel:+1234567890"
-              className="text-sm hover:text-blue-400 transition-colors duration-300"
-            >
-              Contact
-            </a>
+          <div className="flex justify-center space-x-4">
+            {additionalLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 ${link.hoverColor}`}
+                  aria-label={`${link.name}`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="text-sm">{link.name}</span>
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>
     </footer>
   );
-}
+                }
