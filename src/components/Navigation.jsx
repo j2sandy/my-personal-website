@@ -47,7 +47,7 @@ export default function Navigation({
             
             {/* Resume Button */}
             <a
-              href="/resume.pdf"
+              href="https://j2sandy.github.io/my-personal-website/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
