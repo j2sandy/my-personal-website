@@ -23,14 +23,44 @@ export const learningData = {
         { title: "Advanced React", author: "Nadia Makarevich", completion: 30 }
       ],
       courses: [
-        { title: "React - The Complete Guide", platform: "Udemy", completion: 90 },
-        { title: "Advanced React Patterns", platform: "Frontend Masters", completion: 70 },
-        { title: "React Performance", platform: "Egghead", completion: 45 }
+        { 
+          title: "React - The Complete Guide", 
+          platform: "Udemy", 
+          completion: 90,
+          url: "https://www.udemy.com/course/react-the-complete-guide-incl-redux/"
+        },
+        { 
+          title: "Advanced React Patterns", 
+          platform: "Frontend Masters", 
+          completion: 70,
+          url: "https://frontendmasters.com/courses/advanced-react-patterns/"
+        },
+        { 
+          title: "React Performance", 
+          platform: "Egghead", 
+          completion: 45,
+          url: "https://egghead.io/courses/react-performance"
+        }
       ],
       practice: [
-        { title: "Todo App with Hooks", type: "Project", completion: 100 },
-        { title: "E-commerce Dashboard", type: "Project", completion: 80 },
-        { title: "Real-time Chat App", type: "Project", completion: 55 }
+        { 
+          title: "Todo App with Hooks", 
+          type: "Project", 
+          completion: 100,
+          url: "https://github.com/yourusername/react-todo-hooks"
+        },
+        { 
+          title: "E-commerce Dashboard", 
+          type: "Project", 
+          completion: 80,
+          url: "https://github.com/yourusername/ecommerce-dashboard"
+        },
+        { 
+          title: "Real-time Chat App", 
+          type: "Project", 
+          completion: 55,
+          url: "https://github.com/yourusername/react-chat-app"
+        }
       ],
       learningPath: [
         { 
@@ -81,6 +111,26 @@ export const learningData = {
           estimatedHours: 20,
           completedHours: 3
         }
+      ],
+      notes: [
+        {
+          title: "Component Lifecycle & Effects",
+          content: "Remember that useEffect with empty dependency array [] runs only once after mount. Use cleanup functions for subscriptions and timers.",
+          tags: ["hooks", "lifecycle", "useEffect"],
+          createdAt: "2024-01-15"
+        },
+        {
+          title: "State Management Best Practices",
+          content: "Keep state as close to where it's used as possible. Use useCallback for event handlers passed to child components to prevent unnecessary re-renders.",
+          tags: ["state", "performance", "optimization"],
+          createdAt: "2024-01-18"
+        },
+        {
+          title: "React Performance Tips",
+          content: "React.memo() for preventing unnecessary re-renders, useMemo() for expensive calculations, and useCallback() for function references.",
+          tags: ["performance", "memo", "optimization"],
+          createdAt: "2024-01-22"
+        }
       ]
     },
     "Node.js": {
@@ -90,14 +140,44 @@ export const learningData = {
         { title: "Node.js in Action", author: "Mike Cantelon", completion: 40 }
       ],
       courses: [
-        { title: "Node.js: The Complete Guide", platform: "Udemy", completion: 85 },
-        { title: "API Design in Node.js", platform: "Pluralsight", completion: 65 },
-        { title: "Node.js Microservices", platform: "LinkedIn Learning", completion: 30 }
+        { 
+          title: "Node.js: The Complete Guide", 
+          platform: "Udemy", 
+          completion: 85,
+          url: "https://www.udemy.com/course/nodejs-the-complete-guide/"
+        },
+        { 
+          title: "API Design in Node.js", 
+          platform: "Pluralsight", 
+          completion: 65,
+          url: "https://www.pluralsight.com/courses/nodejs-api-design"
+        },
+        { 
+          title: "Node.js Microservices", 
+          platform: "LinkedIn Learning", 
+          completion: 30,
+          url: "https://www.linkedin.com/learning/node-js-microservices"
+        }
       ],
       practice: [
-        { title: "REST API with Express", type: "Project", completion: 100 },
-        { title: "GraphQL Server", type: "Project", completion: 70 },
-        { title: "Microservices Architecture", type: "Project", completion: 40 }
+        { 
+          title: "REST API with Express", 
+          type: "Project", 
+          completion: 100,
+          url: "https://github.com/yourusername/express-rest-api"
+        },
+        { 
+          title: "GraphQL Server", 
+          type: "Project", 
+          completion: 70,
+          url: "https://github.com/yourusername/graphql-server"
+        },
+        { 
+          title: "Microservices Architecture", 
+          type: "Project", 
+          completion: 40,
+          url: "https://github.com/yourusername/nodejs-microservices"
+        }
       ],
       learningPath: [
         { 
@@ -148,6 +228,26 @@ export const learningData = {
           estimatedHours: 20,
           completedHours: 4
         }
+      ],
+      notes: [
+        {
+          title: "Event Loop Understanding",
+          content: "Node.js is single-threaded but uses event-driven, non-blocking I/O. The event loop has phases: timers, pending callbacks, idle/prepare, poll, check, close callbacks.",
+          tags: ["event-loop", "async", "fundamentals"],
+          createdAt: "2024-01-10"
+        },
+        {
+          title: "Express Middleware Pattern",
+          content: "Middleware functions execute sequentially. Always call next() unless you're ending the request cycle. Order matters - error handling middleware should be last.",
+          tags: ["express", "middleware", "patterns"],
+          createdAt: "2024-01-14"
+        },
+        {
+          title: "Database Connection Pooling",
+          content: "Use connection pooling for better performance. For PostgreSQL with pg library, set pool size based on CPU cores and expected load.",
+          tags: ["database", "performance", "postgresql"],
+          createdAt: "2024-01-20"
+        }
       ]
     },
     "Python": {
@@ -157,14 +257,44 @@ export const learningData = {
         { title: "Effective Python", author: "Brett Slatkin", completion: 25 }
       ],
       courses: [
-        { title: "Python for Everybody", platform: "Coursera", completion: 100 },
-        { title: "Advanced Python", platform: "Real Python", completion: 50 },
-        { title: "Python Web Development", platform: "Udemy", completion: 35 }
+        { 
+          title: "Python for Everybody", 
+          platform: "Coursera", 
+          completion: 100,
+          url: "https://www.coursera.org/specializations/python"
+        },
+        { 
+          title: "Advanced Python", 
+          platform: "Real Python", 
+          completion: 50,
+          url: "https://realpython.com/courses/advanced-python/"
+        },
+        { 
+          title: "Python Web Development", 
+          platform: "Udemy", 
+          completion: 35,
+          url: "https://www.udemy.com/course/python-web-development/"
+        }
       ],
       practice: [
-        { title: "Web Scraper", type: "Project", completion: 100 },
-        { title: "Data Analysis Tool", type: "Project", completion: 75 },
-        { title: "Django Blog", type: "Project", completion: 50 }
+        { 
+          title: "Web Scraper", 
+          type: "Project", 
+          completion: 100,
+          url: "https://github.com/yourusername/python-web-scraper"
+        },
+        { 
+          title: "Data Analysis Tool", 
+          type: "Project", 
+          completion: 75,
+          url: "https://github.com/yourusername/data-analysis-tool"
+        },
+        { 
+          title: "Django Blog", 
+          type: "Project", 
+          completion: 50,
+          url: "https://github.com/yourusername/django-blog"
+        }
       ],
       learningPath: [
         { 
@@ -214,6 +344,26 @@ export const learningData = {
           description: "FastAPI, Docker, cloud deployment",
           estimatedHours: 28,
           completedHours: 3
+        }
+      ],
+      notes: [
+        {
+          title: "Python List Comprehensions",
+          content: "List comprehensions are more Pythonic and often faster than loops: [x**2 for x in range(10) if x % 2 == 0]. Use generator expressions for memory efficiency.",
+          tags: ["syntax", "comprehensions", "performance"],
+          createdAt: "2024-01-08"
+        },
+        {
+          title: "Django ORM Tips",
+          content: "Use select_related() for ForeignKey, prefetch_related() for ManyToMany. Always use .exists() instead of len() for checking queryset existence.",
+          tags: ["django", "orm", "optimization"],
+          createdAt: "2024-01-16"
+        },
+        {
+          title: "Python Virtual Environments",
+          content: "Always use virtual environments: python -m venv env, then source env/bin/activate. Use requirements.txt for dependency management: pip freeze > requirements.txt",
+          tags: ["environment", "dependencies", "best-practices"],
+          createdAt: "2024-01-12"
         }
       ]
     }
