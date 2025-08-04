@@ -50,7 +50,7 @@ export default function BlogPage({ darkMode }) {
             </a>
             
             <a
-              href="https://dev.to/nitinshandilya"
+              href="https://nitins-newsletter-0d75cc.beehiiv.com/"
               target="_blank"
               rel="noopener noreferrer"
               className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 border-2 ${
@@ -60,7 +60,7 @@ export default function BlogPage({ darkMode }) {
               }`}
             >
               <ExternalLink className="w-5 h-5" />
-              <span>Read on Dev.to</span>
+              <span>Read on Beehiiv</span>
             </a>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function BlogPage({ darkMode }) {
             }`}>
               <Edit3 className="w-16 h-16 mx-auto mb-4 opacity-50" />
               <p className="text-xl">No posts found for this tag</p>
-              <p>Check out my latest articles on Medium and Dev.to!</p>
+              <p>Check out my latest articles on Medium and Beehiiv!</p>
             </div>
           ) : (
             <div className="space-y-8">
