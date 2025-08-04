@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle } from 'lucide-react';
+import { X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, FileText, ExternalLink } from 'lucide-react';
 import { learningData } from '../data/learningData';
 
 const ProgressBar = ({ completion, darkMode }) => (
@@ -18,7 +18,8 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     { id: 'path', label: 'Learning Path', icon: MapPin },
     { id: 'books', label: 'Books', icon: Book },
     { id: 'courses', label: 'Courses', icon: Video },
-    { id: 'practice', label: 'Practice', icon: Code }
+    { id: 'practice', label: 'Practice', icon: Code },
+    { id: 'notes', label: 'My Notes', icon: FileText }
   ];
 
   const renderContent = () => {
@@ -143,6 +144,54 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
       );
     }
 
+    if (activeTab === 'notes') {
+      return (
+        <div className="space-y-4">
+          {data.notes?.map((note, index) => (
+            <div key={index} className={`p-4 rounded-lg border transition-colors duration-300 ${
+              darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'
+            }`}>
+              <div className="flex justify-between items-start mb-2">
+                <h4 className={`font-semibold transition-colors duration-300 ${
+                  darkMode ? 'text-white' : 'text-gray-800'
+                }`}>{note.title}</h4>
+                <span className={`text-xs transition-colors duration-300 ${
+                  darkMode ? 'text-gray-400' : 'text-gray-500'
+                }`}>
+                  {new Date(note.createdAt).toLocaleDateString()}
+                </span>
+              </div>
+              <p className={`text-sm mb-3 leading-relaxed transition-colors duration-300 ${
+                darkMode ? 'text-gray-300' : 'text-gray-700'
+              }`}>{note.content}</p>
+              <div className="flex flex-wrap gap-2">
+                {note.tags.map((tag, tagIndex) => (
+                  <span
+                    key={tagIndex}
+                    className={`px-2 py-1 text-xs rounded-full transition-colors duration-300 ${
+                      darkMode 
+                        ? 'bg-blue-900 text-blue-300 border border-blue-700' 
+                        : 'bg-blue-100 text-blue-700'
+                    }`}
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )) || (
+            <div className={`text-center py-8 transition-colors duration-300 ${
+              darkMode ? 'text-gray-400' : 'text-gray-500'
+            }`}>
+              <FileText className="w-12 h-12 mx-auto mb-3 opacity-50" />
+              <p>No notes yet for {skill}</p>
+              <p className="text-sm mt-1">Start taking notes to track your learning insights!</p>
+            </div>
+          )}
+        </div>
+      );
+    }
+
     const items = data[activeTab] || [];
     
     return (
@@ -152,10 +201,25 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
             darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'
           }`}>
             <div className="flex justify-between items-start mb-2">
-              <div>
-                <h4 className={`font-semibold transition-colors duration-300 ${
-                  darkMode ? 'text-white' : 'text-gray-800'
-                }`}>{item.title}</h4>
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <h4 className={`font-semibold transition-colors duration-300 ${
+                    darkMode ? 'text-white' : 'text-gray-800'
+                  }`}>{item.title}</h4>
+                  {item.url && (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`p-1 rounded transition-colors duration-300 hover:bg-opacity-80 ${
+                        darkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-500'
+                      }`}
+                      title="Open external link"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
                 {item.author && (
                   <p className={`text-sm transition-colors duration-300 ${
                     darkMode ? 'text-gray-400' : 'text-gray-600'
@@ -362,4 +426,4 @@ export default function LearningPage({ darkMode }) {
       )}
     </div>
   );
-}
+        }
