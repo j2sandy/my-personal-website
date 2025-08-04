@@ -7,7 +7,7 @@ export const blogData = [
     readTime: "5 min read",
     tags: ["React Native", "Mobile Development", "Learning"],
     content: "Full blog post content would go here...",
-    platform: "Personal"
+    platform: "Medium"
   },
   {
     id: 2,
@@ -27,26 +27,6 @@ export const blogData = [
     readTime: "7 min read",
     tags: ["JavaScript", "Programming", "Tutorial"],
     externalLink: "https://dev.to/nitinshandilya/javascript-closures-explained",
-    platform: "Dev.to"
-  },
-  {
-    id: 4,
-    title: "My Morning Routine for Better Focus",
-    date: "February 20, 2024",
-    excerpt: "The habits and practices that help me start each day with clarity and intention, boosting my overall productivity.",
-    readTime: "4 min read",
-    tags: ["Wellness", "Productivity", "Morning Routine"],
-    content: "Full blog post content would go here...",
-    platform: "Personal"
-  },
-  {
-    id: 5,
-    title: "Advanced React Patterns You Should Know",
-    date: "February 15, 2024",
-    excerpt: "Exploring compound components, render props, and custom hooks to write more maintainable React code.",
-    readTime: "8 min read",
-    tags: ["React", "JavaScript", "Advanced", "Patterns"],
-    externalLink: "https://medium.com/@nitinshandilya/advanced-react-patterns",
-    platform: "Medium"
+    platform: "Beehiiv"
   }
 ];
