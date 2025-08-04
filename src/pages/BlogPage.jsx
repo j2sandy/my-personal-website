@@ -1,27 +1,11 @@
 import { useState } from 'react';
-import { Plus, ExternalLink, Edit3} from 'lucide-react';
+import { ExternalLink, Edit3 } from 'lucide-react';
 import { blogData } from '../data/blogData';
-import BlogPostForm from '../components/BlogPostForm';
 import BlogCard from '../components/BlogCard';
 
 export default function BlogPage({ darkMode }) {
-  const [posts, setPosts] = useState(blogData);
-  const [showForm, setShowForm] = useState(false);
+  const [posts] = useState(blogData); // Remove setPosts since no adding
   const [selectedTag, setSelectedTag] = useState('all');
-
-  const handleAddPost = (newPost) => {
-    const post = {
-      ...newPost,
-      id: Date.now(),
-      date: new Date().toLocaleDateString('en-US', { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-      })
-    };
-    setPosts([post, ...posts]);
-    setShowForm(false);
-  };
 
   // Get all unique tags
   const allTags = ['all', ...new Set(posts.flatMap(post => post.tags))];
@@ -49,32 +33,20 @@ export default function BlogPage({ darkMode }) {
             Thoughts, tutorials, and insights from my journey in tech and life
           </p>
           
-          {/* Action Buttons */}
+          {/* External Platform Links Only */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <button
-              onClick={() => setShowForm(true)}
+            <a
+              href="https://medium.com/@nitinshandilya"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 ${
                 darkMode 
                   ? 'bg-orange-600 hover:bg-orange-700 text-white' 
                   : 'bg-orange-500 hover:bg-orange-600 text-white'
               }`}
             >
-              <Plus className="w-5 h-5" />
-              <span>Write New Post</span>
-            </button>
-            
-            <a
-              href="https://medium.com/@nitinshandilya"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 border-2 ${
-                darkMode 
-                  ? 'border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-gray-900' 
-                  : 'border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white'
-              }`}
-            >
               <ExternalLink className="w-5 h-5" />
-              <span>View on Medium</span>
+              <span>Read on Medium</span>
             </a>
             
             <a
@@ -88,7 +60,7 @@ export default function BlogPage({ darkMode }) {
               }`}
             >
               <ExternalLink className="w-5 h-5" />
-              <span>View on Dev.to</span>
+              <span>Read on Dev.to</span>
             </a>
           </div>
         </div>
@@ -124,7 +96,7 @@ export default function BlogPage({ darkMode }) {
             }`}>
               <Edit3 className="w-16 h-16 mx-auto mb-4 opacity-50" />
               <p className="text-xl">No posts found for this tag</p>
-              <p>Try selecting a different tag or write a new post!</p>
+              <p>Check out my latest articles on Medium and Dev.to!</p>
             </div>
           ) : (
             <div className="space-y-8">
@@ -138,15 +110,6 @@ export default function BlogPage({ darkMode }) {
             </div>
           )}
         </div>
-
-        {/* Blog Post Form Modal */}
-        {showForm && (
-          <BlogPostForm
-            darkMode={darkMode}
-            onSubmit={handleAddPost}
-            onClose={() => setShowForm(false)}
-          />
-        )}
       </div>
     </div>
   );
