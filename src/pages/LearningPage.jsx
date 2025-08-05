@@ -298,7 +298,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
   const [editingItem, setEditingItem] = useState(null);
-  const [learningData, setLearningData] = useState(initialLearningData);
+  const [learningData, setLearningData] = useState(learningData);
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: TrendingUp },
@@ -777,7 +777,7 @@ export default function LearningPage({ darkMode = false }) {
               darkMode ? 'text-gray-400' : 'text-gray-600'
             }`}>Your active learning priorities</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {initialLearningData.currentFocus.map((item, index) => (
+              {learningData.currentFocus.map((item, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedSkill(item.skill)}
@@ -850,8 +850,8 @@ export default function LearningPage({ darkMode = false }) {
             </div>
             
             <div className="flex flex-wrap gap-3">
-              {initialLearningData.skills.map((skill) => {
-                const hasDetails = initialLearningData.skillDetails[skill];
+              {learningData.skills.map((skill) => {
+                const hasDetails = learningData.skillDetails[skill];
                 return (
                   <button
                     key={skill}
@@ -880,10 +880,10 @@ export default function LearningPage({ darkMode = false }) {
       </div>
 
       {/* Skill Detail Modal */}
-      {selectedSkill && initialLearningData.skillDetails[selectedSkill] && (
+      {selectedSkill && learningData.skillDetails[selectedSkill] && (
         <SkillDetailView
           skill={selectedSkill}
-          data={initialLearningData.skillDetails[selectedSkill]}
+          data={learningData.skillDetails[selectedSkill]}
           darkMode={darkMode}
           onClose={() => setSelectedSkill(null)}
         />
