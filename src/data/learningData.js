@@ -218,7 +218,7 @@ export const learningData = {
       courses: [
         {
           id: 1,
-          title: "JavaScript: The Advanced Concepts",
+          title: "JavaScript, The Advanced Concepts",
           platform: "Udemy",
           completion: 85,
           timeSpent: 30,
