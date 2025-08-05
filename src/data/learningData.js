@@ -209,7 +209,7 @@ export const learningData = {
           title: "You Don't Know JS",
           author: "Kyle Simpson",
           completion: 75,
-          url: "https://example.com/js-good-parts",
+          url: null,
           timeSpent: 20,
           lastRead: new Date().toISOString()
         }
