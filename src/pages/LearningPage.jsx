@@ -618,14 +618,28 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
                   <h4 className={`font-semibold transition-colors duration-300 ${
                     darkMode ? 'text-white' : 'text-gray-800'
                   }`}>{item.title}</h4>
-                  {item.url && (
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`p-1 rounded transition-colors duration-300 hover:bg-opacity-80 ${
-                        darkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-500'
-                      }`}
+                  {item.url ? (
+  <a
+    href={item.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`p-1 rounded transition-colors duration-300 hover:bg-opacity-80 ${
+      darkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-500'
+    }`}
+    title="Open external link"
+  >
+    {item.title}
+  </a>
+) : (
+  <span
+    className={`p-1 rounded transition-colors duration-300 ${
+      darkMode ? 'text-gray-400' : 'text-gray-500'
+    }`}
+  >
+    {item.title}
+  </span>
+)}
+                  
                       title="Open external link"
                     >
                       <ExternalLink className="w-4 h-4" />
