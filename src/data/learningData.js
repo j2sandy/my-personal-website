@@ -206,19 +206,10 @@ export const learningData = {
       books: [
         {
           id: 1,
-          title: "JavaScript: The Good Parts",
-          author: "Douglas Crockford",
-          completion: 100,
-          url: "#",
-          timeSpent: 15,
-          lastRead: new Date().toISOString()
-        },
-        {
-          id: 2,
           title: "You Don't Know JS",
           author: "Kyle Simpson",
           completion: 75,
-          url: "#",
+          url: "https://example.com/js-good-parts",
           timeSpent: 20,
           lastRead: new Date().toISOString()
         }
