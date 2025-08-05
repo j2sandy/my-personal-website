@@ -1,3 +1,4 @@
+// learningData.js - Centralized learning progress data
 export const learningData = {
   currentFocus: [
     {
@@ -68,7 +69,7 @@ export const learningData = {
           title: "React Up & Running",
           author: "Stoyan Stefanov",
           completion: 85,
-          url: "https://example.com",
+          url: "#",
           timeSpent: 12,
           lastRead: new Date().toISOString()
         },
@@ -77,7 +78,7 @@ export const learningData = {
           title: "Learning React",
           author: "Alex Banks & Eve Porcello",
           completion: 60,
-          url: "https://example.com",
+          url: "#",
           timeSpent: 8,
           lastRead: new Date().toISOString()
         }
@@ -89,7 +90,7 @@ export const learningData = {
           title: "Complete React Developer Course",
           platform: "Udemy",
           completion: 70,
-          url: "https://example.com",
+          url: "#",
           timeSpent: 25,
           lastAccessed: new Date().toISOString()
         },
@@ -98,7 +99,7 @@ export const learningData = {
           title: "React - The Complete Guide",
           platform: "Udemy",
           completion: 45,
-          url: "https://example.com",
+          url: "#",
           timeSpent: 18,
           lastAccessed: new Date().toISOString()
         }
@@ -209,7 +210,7 @@ export const learningData = {
           title: "JavaScript: The Good Parts",
           author: "Douglas Crockford",
           completion: 100,
-          url: "https://example.com",
+          url: "#",
           timeSpent: 15,
           lastRead: new Date().toISOString()
         },
@@ -218,7 +219,7 @@ export const learningData = {
           title: "You Don't Know JS",
           author: "Kyle Simpson",
           completion: 75,
-          url: "https://example.com",
+          url: "#",
           timeSpent: 20,
           lastRead: new Date().toISOString()
         }
@@ -230,7 +231,7 @@ export const learningData = {
           title: "JavaScript: The Advanced Concepts",
           platform: "Udemy",
           completion: 85,
-          url: "https://example.com",
+          url: "#",
           timeSpent: 30,
           lastAccessed: new Date().toISOString()
         }
