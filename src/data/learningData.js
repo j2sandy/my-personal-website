@@ -1,4 +1,3 @@
-// learningData.js - Centralized learning progress data
 export const learningData = {
   currentFocus: [
     {
