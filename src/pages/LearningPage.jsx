@@ -1,6 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
-import { X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, FileText, ExternalLink, Search, Filter, TrendingUp, Award, Calendar, Plus, Edit2, Target, Play, Pause, RotateCcw, Save, Trash2 } from 'lucide-react';
-import { learningData } from '../data/learningData';
+import { 
+  X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, 
+  FileText, ExternalLink, Search, Filter, TrendingUp, Award, 
+  Calendar, Plus, Edit2, Target, Play, Pause, RotateCcw, Save, Trash2 
+} from 'lucide-react';
+import { learningData } from '../data/learningData.js';
 
 // Study session timer component
 const StudyTimer = ({ skill, onSessionComplete, darkMode }) => {
@@ -247,6 +251,7 @@ const DailyProgressChart = ({ data, darkMode }) => {
   );
 };
 
+// Progress bar component
 const ProgressBar = ({ completion, darkMode, size = "default", animated = false }) => {
   const heights = {
     small: "h-1",
@@ -266,6 +271,7 @@ const ProgressBar = ({ completion, darkMode, size = "default", animated = false 
   );
 };
 
+// Statistics card component
 const StatCard = ({ icon: Icon, label, value, color = "green", darkMode, trend = null }) => (
   <div className={`p-4 rounded-lg transition-colors duration-300 ${
     darkMode ? 'bg-gray-700' : 'bg-gray-50'
@@ -295,11 +301,11 @@ const StatCard = ({ icon: Icon, label, value, color = "green", darkMode, trend =
   </div>
 );
 
+// Detailed skill view component
 const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
   const [editingItem, setEditingItem] = useState(null);
-  const [learningData, setLearningData] = useState(learningData);
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: TrendingUp },
@@ -508,7 +514,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
                         <span className={`text-sm font-medium ml-4 transition-colors duration-300 ${
                           item.completion === 100 
                             ? 'text-green-500' 
-              : darkMode ? `text-${color}-400` : `text-${color}-600`
+                            : darkMode ? `text-${color}-400` : `text-${color}-600`
                         }`}>
                           {item.completion}%
                         </span>
@@ -746,6 +752,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   );
 };
 
+// Main Learning Page Component
 export default function LearningPage({ darkMode = false }) {
   const [selectedSkill, setSelectedSkill] = useState(null);
   const [filterActive, setFilterActive] = useState(false);
@@ -891,4 +898,4 @@ export default function LearningPage({ darkMode = false }) {
       )}
     </div>
   );
-}
+              }
