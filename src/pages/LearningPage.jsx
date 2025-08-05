@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, FileText, ExternalLink, Search, Filter, TrendingUp, Award, Calendar, Plus, Edit2, Target, Play, Pause, RotateCcw, Save, Trash2 } from 'lucide-react';
-import { learningData } from '../data/learningData'
+import { learningData } from '../data/learningData';
 
 // Study session timer component
 const StudyTimer = ({ skill, onSessionComplete, darkMode }) => {
