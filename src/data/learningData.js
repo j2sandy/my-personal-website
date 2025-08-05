@@ -221,7 +221,7 @@ export const learningData = {
           title: "JavaScript: The Advanced Concepts",
           platform: "Udemy",
           completion: 85,
-          url: "#",
+          url: null,
           timeSpent: 30,
           lastAccessed: new Date().toISOString()
         }
