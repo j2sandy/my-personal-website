@@ -69,7 +69,7 @@ export const learningData = {
           title: "React Up & Running",
           author: "Stoyan Stefanov",
           completion: 85,
-          url: "#",
+          url: "test1.com",
           timeSpent: 12,
           lastRead: new Date().toISOString()
         },
@@ -78,7 +78,7 @@ export const learningData = {
           title: "Learning React",
           author: "Alex Banks & Eve Porcello",
           completion: 60,
-          url: "#",
+          url: "test2.com",
           timeSpent: 8,
           lastRead: new Date().toISOString()
         }
@@ -90,7 +90,7 @@ export const learningData = {
           title: "Complete React Developer Course",
           platform: "Udemy",
           completion: 70,
-          url: "#",
+          url: "test.com",
           timeSpent: 25,
           lastAccessed: new Date().toISOString()
         },
@@ -99,7 +99,7 @@ export const learningData = {
           title: "React - The Complete Guide",
           platform: "Udemy",
           completion: 45,
-          url: "#",
+          url: "test.com",
           timeSpent: 18,
           lastAccessed: new Date().toISOString()
         }
@@ -210,7 +210,7 @@ export const learningData = {
           title: "JavaScript: The Good Parts",
           author: "Douglas Crockford",
           completion: 100,
-          url: "#",
+          url: "test.com",
           timeSpent: 15,
           lastRead: new Date().toISOString()
         },
@@ -219,7 +219,7 @@ export const learningData = {
           title: "You Don't Know JS",
           author: "Kyle Simpson",
           completion: 75,
-          url: "#",
+          url: "test.com",
           timeSpent: 20,
           lastRead: new Date().toISOString()
         }
@@ -231,7 +231,7 @@ export const learningData = {
           title: "JavaScript: The Advanced Concepts",
           platform: "Udemy",
           completion: 85,
-          url: "#",
+          url: "test.com",
           timeSpent: 30,
           lastAccessed: new Date().toISOString()
         }
