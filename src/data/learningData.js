@@ -209,7 +209,7 @@ export const learningData = {
           title: "You Don't Know JS",
           author: "Kyle Simpson",
           completion: 75,
-          url: null,
+          url: "test.com",
           timeSpent: 20,
           lastRead: new Date().toISOString()
         }
@@ -221,7 +221,7 @@ export const learningData = {
           title: "JavaScript: The Advanced Concepts",
           platform: "Udemy",
           completion: 85,
-          url: null,
+          url: "test.com",
           timeSpent: 30,
           lastAccessed: new Date().toISOString()
         }
