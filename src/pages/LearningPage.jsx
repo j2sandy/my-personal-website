@@ -5,7 +5,7 @@ import {
   FileText, ExternalLink, Search, Filter, TrendingUp, Award, 
   Calendar, Edit2, Play, Pause, RotateCcw, Save
 } from 'lucide-react';
-import { learningData } from './learningData.js';
+import { learningData } from '../data/learningData.js';
 
 // Study session timer component
 const StudyTimer = ({ skill, onSessionComplete, darkMode }) => {
