@@ -1,131 +1,10 @@
-// LearningPage.jsx - Main learning dashboard component
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { 
   X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, 
   FileText, ExternalLink, Search, Filter, TrendingUp, Award, 
-  Calendar, Edit2, Play, Pause, RotateCcw, Save
+  Calendar, Edit2
 } from 'lucide-react';
 import { learningData } from '../data/learningData.js';
-
-// Study session timer component
-const StudyTimer = ({ skill, onSessionComplete, darkMode }) => {
-  const [isActive, setIsActive] = useState(false);
-  const [time, setTime] = useState(0);
-  const [sessionType, setSessionType] = useState('study');
-
-  useEffect(() => {
-    let interval = null;
-    if (isActive) {
-      interval = setInterval(() => {
-        setTime(time => time + 1);
-      }, 1000);
-    } else if (!isActive && time !== 0) {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [isActive, time]);
-
-  const reset = () => {
-    setTime(0);
-    setIsActive(false);
-  };
-
-  const complete = () => {
-    if (time > 0) {
-      onSessionComplete({
-        skill,
-        duration: time,
-        type: sessionType,
-        timestamp: new Date().toISOString()
-      });
-      reset();
-    }
-  };
-
-  const formatTime = (seconds) => {
-    const hrs = Math.floor(seconds / 3600);
-    const mins = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  return (
-    <div className={`p-6 rounded-lg border transition-colors duration-300 ${
-      darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'
-    }`}>
-      <div className="flex items-center justify-between mb-6">
-        <h4 className={`font-semibold text-lg transition-colors duration-300 ${
-          darkMode ? 'text-white' : 'text-gray-800'
-        }`}>Study Timer - {skill}</h4>
-        <select
-          value={sessionType}
-          onChange={(e) => setSessionType(e.target.value)}
-          className={`px-3 py-2 rounded border text-sm transition-colors duration-300 ${
-            darkMode 
-              ? 'bg-gray-600 text-white border-gray-500' 
-              : 'bg-gray-100 text-gray-800 border-gray-300'
-          }`}
-        >
-          <option value="study">Study</option>
-          <option value="practice">Practice</option>
-          <option value="review">Review</option>
-        </select>
-      </div>
-      
-      <div className="text-center mb-6">
-        <div className={`text-5xl font-mono font-bold mb-4 transition-colors duration-300 ${
-          darkMode ? 'text-green-400' : 'text-green-600'
-        }`}>
-          {formatTime(time)}
-        </div>
-        <p className={`text-sm transition-colors duration-300 ${
-          darkMode ? 'text-gray-400' : 'text-gray-600'
-        }`}>
-          Session Type: {sessionType.charAt(0).toUpperCase() + sessionType.slice(1)}
-        </p>
-      </div>
-
-      <div className="flex justify-center space-x-3">
-        <button
-          onClick={() => setIsActive(!isActive)}
-          className={`px-6 py-3 rounded-lg font-medium flex items-center space-x-2 transition-colors duration-300 ${
-            isActive 
-              ? 'bg-red-500 hover:bg-red-600 text-white'
-              : 'bg-green-500 hover:bg-green-600 text-white'
-          }`}
-        >
-          {isActive ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-          <span>{isActive ? 'Pause' : 'Start'}</span>
-        </button>
-        <button
-          onClick={reset}
-          className={`px-6 py-3 rounded-lg font-medium flex items-center space-x-2 transition-colors duration-300 ${
-            darkMode 
-              ? 'bg-gray-600 hover:bg-gray-500 text-white' 
-              : 'bg-gray-300 hover:bg-gray-400 text-gray-800'
-          }`}
-        >
-          <RotateCcw className="w-4 h-4" />
-          <span>Reset</span>
-        </button>
-        <button
-          onClick={complete}
-          disabled={time === 0}
-          className={`px-6 py-3 rounded-lg font-medium flex items-center space-x-2 transition-colors duration-300 ${
-            time > 0
-              ? 'bg-blue-500 hover:bg-blue-600 text-white'
-              : darkMode 
-                ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-          }`}
-        >
-          <Save className="w-4 h-4" />
-          <span>Complete</span>
-        </button>
-      </div>
-    </div>
-  );
-};
 
 // Progress update modal
 const ProgressUpdateModal = ({ item, onUpdate, onClose, darkMode }) => {
@@ -217,41 +96,6 @@ const ProgressUpdateModal = ({ item, onUpdate, onClose, darkMode }) => {
   );
 };
 
-// Daily progress chart
-const DailyProgressChart = ({ data, darkMode }) => {
-  const maxHours = Math.max(...data.map(d => d.hours), 1);
-  
-  return (
-    <div className={`p-4 rounded-lg border transition-colors duration-300 ${
-      darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'
-    }`}>
-      <h4 className={`font-semibold mb-4 transition-colors duration-300 ${
-        darkMode ? 'text-white' : 'text-gray-800'
-      }`}>Daily Study Hours (Last 7 Days)</h4>
-      <div className="flex items-end space-x-2 h-32">
-        {data.slice(-7).map((day, index) => (
-          <div key={index} className="flex-1 flex flex-col items-center">
-            <div
-              className="w-full bg-green-500 rounded-t transition-all duration-300 hover:bg-green-400"
-              style={{ height: `${(day.hours / maxHours) * 100}%`, minHeight: '4px' }}
-            />
-            <div className={`text-xs mt-2 transition-colors duration-300 ${
-              darkMode ? 'text-gray-400' : 'text-gray-600'
-            }`}>
-              {new Date(day.date).toLocaleDateString('en', { weekday: 'short' })}
-            </div>
-            <div className={`text-xs font-medium transition-colors duration-300 ${
-              darkMode ? 'text-white' : 'text-gray-800'
-            }`}>
-              {day.hours}h
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 // Progress bar component
 const ProgressBar = ({ completion, darkMode, size = "default", animated = false }) => {
   const heights = {
@@ -305,22 +149,22 @@ const StatCard = ({ icon: Icon, label, value, color = "green", darkMode, trend =
 // Detailed skill view component
 const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
+  const [activePathTab, setActivePathTab] = useState('path');
   const [searchTerm, setSearchTerm] = useState('');
   const [editingItem, setEditingItem] = useState(null);
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: TrendingUp },
-    { id: 'timer', label: 'Study Timer', icon: Clock },
+    { id: 'learning', label: 'Learning Path', icon: MapPin }
+  ];
+
+  const pathTabs = [
     { id: 'path', label: 'Learning Path', icon: MapPin },
     { id: 'books', label: 'Books', icon: Book },
     { id: 'courses', label: 'Courses', icon: Video },
     { id: 'practice', label: 'Practice', icon: Code },
     { id: 'notes', label: 'My Notes', icon: FileText }
   ];
-
-  const handleSessionComplete = (session) => {
-    alert(`Study session completed!\nSkill: ${session.skill}\nDuration: ${Math.floor(session.duration / 60)} minutes\nType: ${session.type}`);
-  };
 
   const handleUpdateProgress = (updatedItem) => {
     alert(`Progress updated for: ${updatedItem.title}\nCompletion: ${updatedItem.completion}%`);
@@ -382,11 +226,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
           />
         </div>
 
-        {/* Daily Progress Chart */}
-        {data.dailyProgress && (
-          <DailyProgressChart data={data.dailyProgress} darkMode={darkMode} />
-        )}
-
         {/* Phase Progress */}
         <div className={`p-6 rounded-lg border transition-colors duration-300 ${
           darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'
@@ -425,24 +264,8 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     );
   };
 
-  const renderContent = () => {
-    if (activeTab === 'overview') {
-      return renderOverview();
-    }
-
-    if (activeTab === 'timer') {
-      return (
-        <div className="space-y-6">
-          <StudyTimer 
-            skill={skill} 
-            onSessionComplete={handleSessionComplete}
-            darkMode={darkMode}
-          />
-        </div>
-      );
-    }
-
-    if (activeTab === 'path') {
+  const renderLearningPath = () => {
+    if (activePathTab === 'path') {
       return (
         <div className="space-y-6">
           {['Fundamentals', 'Intermediate', 'Advanced'].map((phase) => {
@@ -531,7 +354,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
       );
     }
 
-    if (activeTab === 'notes') {
+    if (activePathTab === 'notes') {
       const filteredNotes = data.notes?.filter(note => 
         note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         note.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -604,7 +427,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
       );
     }
 
-    const items = data[activeTab] || [];
+    const items = data[activePathTab] || [];
     
     return (
       <div className="space-y-4">
@@ -655,7 +478,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
                     darkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-600'
                   }`}
                 >
-                  <Edit2 className="w-4 h-4" />
+                    <Edit2 className="w-4 h-4" />
                 </button>
                 <span className={`text-sm font-medium transition-colors duration-300 ${
                   darkMode ? 'text-green-400' : 'text-green-600'
@@ -669,6 +492,49 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
         ))}
       </div>
     );
+  };
+
+  const renderContent = () => {
+    if (activeTab === 'overview') {
+      return renderOverview();
+    }
+
+    if (activeTab === 'learning') {
+      return (
+        <div className="space-y-6">
+          {/* Path Sub-tabs */}
+          <div className={`border-b transition-colors duration-300 ${
+            darkMode ? 'border-gray-600' : 'border-gray-200'
+          }`}>
+            <div className="flex space-x-6 overflow-x-auto">
+              {pathTabs.map((tab) => {
+                const Icon = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActivePathTab(tab.id)}
+                    className={`py-3 px-3 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-300 ${
+                      activePathTab === tab.id
+                        ? 'border-green-500 text-green-500'
+                        : `border-transparent ${
+                            darkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'
+                          }`
+                    }`}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <Icon className="w-4 h-4" />
+                      <span>{tab.label}</span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {renderLearningPath()}
+        </div>
+      );
+    }
   };
 
   return (
@@ -705,7 +571,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
           </div>
         </div>
 
-        {/* Tabs */}
+        {/* Main Tabs */}
         <div className={`border-b transition-colors duration-300 ${
           darkMode ? 'border-gray-700' : 'border-gray-200'
         }`}>
@@ -899,4 +765,4 @@ export default function LearningPage({ darkMode = false }) {
       )}
     </div>
   );
-            }
+}
