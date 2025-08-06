@@ -1,8 +1,9 @@
-import { useState } from 'react';
+// LearningPage.jsx - Main learning dashboard component
+import { useState, useEffect } from 'react';
 import { 
   X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, 
   FileText, ExternalLink, Search, Filter, TrendingUp, Award, 
-  Calendar, Edit2
+  Calendar, Edit2, Play, Pause, RotateCcw, Save
 } from 'lucide-react';
 import { learningData } from '../data/learningData.js';
 
@@ -149,7 +150,7 @@ const StatCard = ({ icon: Icon, label, value, color = "green", darkMode, trend =
 // Detailed skill view component
 const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
-  const [activePathTab, setActivePathTab] = useState('path');
+  const [activePathTab, setActivePathTab] = useState('books');
   const [searchTerm, setSearchTerm] = useState('');
   const [editingItem, setEditingItem] = useState(null);
 
@@ -159,11 +160,11 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   ];
 
   const pathTabs = [
-    { id: 'path', label: 'Learning Path', icon: MapPin },
     { id: 'books', label: 'Books', icon: Book },
     { id: 'courses', label: 'Courses', icon: Video },
     { id: 'practice', label: 'Practice', icon: Code },
-    { id: 'notes', label: 'My Notes', icon: FileText }
+    { id: 'notes', label: 'My Notes', icon: FileText },
+    { id: 'path', label: 'Learning Path', icon: MapPin }
   ];
 
   const handleUpdateProgress = (updatedItem) => {
@@ -478,7 +479,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
                     darkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-600'
                   }`}
                 >
-                    <Edit2 className="w-4 h-4" />
+                  <Edit2 className="w-4 h-4" />
                 </button>
                 <span className={`text-sm font-medium transition-colors duration-300 ${
                   darkMode ? 'text-green-400' : 'text-green-600'
@@ -765,4 +766,4 @@ export default function LearningPage({ darkMode = false }) {
       )}
     </div>
   );
-}
+      }
