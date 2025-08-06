@@ -1,9 +1,9 @@
 // LearningPage.jsx - Main learning dashboard component
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { 
   X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, 
   FileText, ExternalLink, Search, Filter, TrendingUp, Award, 
-  Calendar, Edit2, Play, Pause, RotateCcw, Save
+  Calendar, Edit2
 } from 'lucide-react';
 import { learningData } from '../data/learningData.js';
 
