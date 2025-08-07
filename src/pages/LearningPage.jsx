@@ -1,9 +1,12 @@
 // LearningPage.jsx - Main learning dashboard component
 import { useState } from 'react';
 import { 
-  X, Book, Video, Code, ArrowLeft, MapPin, ExternalLink, Filter
+  X, Book, Video, Code, ArrowLeft, MapPin, 
+  FileText, ExternalLink, Filter
 } from 'lucide-react';
 import { learningData } from '../data/learningData.js';
+
+// Progress tracking is read-only - managed through code only
 
 // Progress bar component
 const ProgressBar = ({ completion, darkMode, size = "default", animated = false }) => {
@@ -25,7 +28,6 @@ const ProgressBar = ({ completion, darkMode, size = "default", animated = false 
   );
 };
 
-
 // Detailed skill view component
 const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   const [activeTab, setActiveTab] = useState('path');
@@ -35,37 +37,87 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     { id: 'books', label: 'Books', icon: Book },
     { id: 'courses', label: 'Courses', icon: Video },
     { id: 'practice', label: 'Practice', icon: Code },
-    { id: 'notes', label: 'My Notes', icon: ExternalLink }, // Add "My Notes" tab
+    { id: 'notes', label: 'My Notes', icon: FileText }
   ];
 
   const renderLearningPath = () => {
     return (
       <div className="space-y-6">
         {/* Roadmap.sh Link */}
-        <div
-          className={`p-4 rounded-lg border transition-colors duration-300 ${
-            darkMode ? 'bg-gray-700 border-gray-600' : 'bg-blue-50 border-blue-200'
-          }`}
-        >
+        <div className={`p-6 rounded-lg border transition-colors duration-300 ${
+          darkMode ? 'bg-gray-700 border-gray-600' : 'bg-blue-50 border-blue-200'
+        }`}>
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div
-                className={`p-2 rounded-lg ${
-                  darkMode ? 'bg-blue-900/50' : 'bg-blue-100'
-                }`}
-              >
-                <MapPin className="w-5 h-5 text-blue-500" />
+            <div className="flex items-center space-x-4">
+              <div className={`p-3 rounded-lg ${
+                darkMode ? 'bg-blue-900/50' : 'bg-blue-100'
+              }`}>
+                <MapPin className="w-6 h-6 text-blue-500" />
               </div>
               <div>
-                <h4
-                  className={`font-semibold transition-colors duration-300 ${
-                    darkMode ? 'text-white' : 'text-gray-800'
-                  }`}
-                >
-                  Complete Learning Roadmap
-                </h4>
+                <h4 className={`font-semibold text-lg transition-colors duration-300 ${
+                  darkMode ? 'text-white' : 'text-gray-800'
+                }`}>Complete Learning Roadmap</h4>
+                <p className={`text-sm transition-colors duration-300 ${
+                  darkMode ? 'text-gray-400' : 'text-gray-600'
+                }`}>View detailed roadmap and resources on roadmap.sh</p>
               </div>
             </div>
+            <a
+              href={data.roadmapUrl || `https://roadmap.sh/${skill.toLowerCase()}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center space-x-2 px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-lg ${
+                darkMode 
+                  ? 'bg-blue-600 hover:bg-blue-500 text-white' 
+                  : 'bg-blue-500 hover:bg-blue-600 text-white'
+              }`}
+            >
+              <span className="font-medium">View Roadmap</span>
+              <ExternalLink className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderNotes = () => {
+    return (
+      <div className="space-y-6">
+        {/* Notion Link */}
+        <div className={`p-6 rounded-lg border transition-colors duration-300 ${
+          darkMode ? 'bg-gray-700 border-gray-600' : 'bg-purple-50 border-purple-200'
+        }`}>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className={`p-3 rounded-lg ${
+                darkMode ? 'bg-purple-900/50' : 'bg-purple-100'
+              }`}>
+                <FileText className="w-6 h-6 text-purple-500" />
+              </div>
+              <div>
+                <h4 className={`font-semibold text-lg transition-colors duration-300 ${
+                  darkMode ? 'text-white' : 'text-gray-800'
+                }`}>My Notes</h4>
+                <p className={`text-sm transition-colors duration-300 ${
+                  darkMode ? 'text-gray-400' : 'text-gray-600'
+                }`}>View and manage your learning notes in Notion</p>
+              </div>
+            </div>
+            <a
+              href={data.notionUrl || '#'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center space-x-2 px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-lg ${
+                darkMode 
+                  ? 'bg-purple-600 hover:bg-purple-500 text-white' 
+                  : 'bg-purple-500 hover:bg-purple-600 text-white'
+              }`}
+            >
+              <span className="font-medium">Open in Notion</span>
+              <ExternalLink className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </div>
@@ -136,6 +188,8 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     switch (activeTab) {
       case 'path':
         return renderLearningPath();
+      case 'notes':
+        return renderNotes();
       case 'books':
       case 'courses':
       case 'practice':
@@ -213,30 +267,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
           {renderContent()}
         </div>
       </div>
-    </div>
-  );
-};
-
-const renderNotes = () => {
-  const notionLink = data[skill]?.notionUrl; // Fetch Notion URL from learningData
-  return (
-    <div>
-      <h3 className="text-lg font-semibold">My Notes</h3>
-      {notionLink ? (
-        <p className="mt-2">
-          Access your detailed notes for this skill on Notion:
-          <a
-            href={notionLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 underline ml-2"
-          >
-            Open Notion Notes
-          </a>
-        </p>
-      ) : (
-        <p className="mt-2 text-gray-500">No notes available for this skill.</p>
-      )}
     </div>
   );
 };
@@ -387,4 +417,4 @@ export default function LearningPage({ darkMode = false }) {
       )}
     </div>
   );
-              }
+}
