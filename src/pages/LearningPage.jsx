@@ -217,6 +217,30 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   );
 };
 
+const renderNotes = () => {
+  const notionLink = data[skill]?.notionUrl; // Fetch Notion URL from learningData
+  return (
+    <div>
+      <h3 className="text-lg font-semibold">My Notes</h3>
+      {notionLink ? (
+        <p className="mt-2">
+          Access your detailed notes for this skill on Notion:
+          <a
+            href={notionLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline ml-2"
+          >
+            Open Notion Notes
+          </a>
+        </p>
+      ) : (
+        <p className="mt-2 text-gray-500">No notes available for this skill.</p>
+      )}
+    </div>
+  );
+};
+
 // Main Learning Page Component
 export default function LearningPage({ darkMode = false }) {
   const [selectedSkill, setSelectedSkill] = useState(null);
@@ -363,4 +387,4 @@ export default function LearningPage({ darkMode = false }) {
       )}
     </div>
   );
-}
+              }
