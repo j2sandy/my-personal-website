@@ -37,6 +37,7 @@ export const learningData = {
   skillDetails: {
     "AI & ML": {
       roadmapUrl: "https://roadmap.sh/ai-data-scientist",
+      notionUrl: "https://www.notion.so/AI-ML-2486b4d3ddf08086a50af4629633315c"
       learningPath: [
         {
           id: 1,
@@ -46,8 +47,7 @@ export const learningData = {
           completion: 10,
           estimatedHours: 240,
           completedHours: 24,
-          lastUpdated: new Date().toISOString(),
-          notionUrl: "https://www.notion.so/AI-ML-2486b4d3ddf08086a50af4629633315c"
+          lastUpdated: new Date().toISOString()
         }
       ],
       
