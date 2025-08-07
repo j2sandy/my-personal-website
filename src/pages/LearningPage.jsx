@@ -34,48 +34,40 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     { id: 'path', label: 'Learning Path', icon: MapPin },
     { id: 'books', label: 'Books', icon: Book },
     { id: 'courses', label: 'Courses', icon: Video },
-    { id: 'practice', label: 'Practice', icon: Code }
+    { id: 'practice', label: 'Practice', icon: Code },
+    { id: 'notes', label: 'My Notes', icon: ExternalLink }, // Add "My Notes" tab
   ];
 
   const renderLearningPath = () => {
     return (
       <div className="space-y-6">
         {/* Roadmap.sh Link */}
-        <div className={`p-4 rounded-lg border transition-colors duration-300 ${
-          darkMode ? 'bg-gray-700 border-gray-600' : 'bg-blue-50 border-blue-200'
-        }`}>
+        <div
+          className={`p-4 rounded-lg border transition-colors duration-300 ${
+            darkMode ? 'bg-gray-700 border-gray-600' : 'bg-blue-50 border-blue-200'
+          }`}
+        >
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className={`p-2 rounded-lg ${
-                darkMode ? 'bg-blue-900/50' : 'bg-blue-100'
-              }`}>
+              <div
+                className={`p-2 rounded-lg ${
+                  darkMode ? 'bg-blue-900/50' : 'bg-blue-100'
+                }`}
+              >
                 <MapPin className="w-5 h-5 text-blue-500" />
               </div>
               <div>
-                <h4 className={`font-semibold transition-colors duration-300 ${
-                  darkMode ? 'text-white' : 'text-gray-800'
-                }`}>Complete Learning Roadmap</h4>
-                <p className={`text-sm transition-colors duration-300 ${
-                  darkMode ? 'text-gray-400' : 'text-gray-600'
-                }`}>View detailed roadmap and resources on roadmap.sh</p>
+                <h4
+                  className={`font-semibold transition-colors duration-300 ${
+                    darkMode ? 'text-white' : 'text-gray-800'
+                  }`}
+                >
+                  Complete Learning Roadmap
+                </h4>
               </div>
             </div>
-            <a
-              href={data.roadmapUrl || `https://roadmap.sh/${skill?.toLowerCase()}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 hover:shadow-lg ${
-                darkMode 
-                  ? 'bg-blue-600 hover:bg-blue-500 text-white' 
-                  : 'bg-blue-500 hover:bg-blue-600 text-white'
-              }`}
-            >
-              <span className="text-sm font-medium">View Roadmap</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
           </div>
         </div>
-
       </div>
     );
   };
@@ -225,6 +217,69 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   );
 };
 
+const renderNotes = () => {
+  const notionLink = data[skill]?.notionUrl; // Fetch Notion URL from learningData
+  return (
+    <div>
+      <h3 className="text-lg font-semibold">My Notes</h3>
+      {notionLink ? (
+        <p className="mt-2">
+          Access your detailed notes for this skill on Notion:
+          <a
+            href={notionLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline ml-2"
+          >
+            Open Notion Notes
+          </a>
+        </p>
+      ) : (
+        <p className="mt-2 text-gray-500">No notes available for this skill.</p>
+      )}
+    </div>
+  );
+};
+
+return (
+  <div
+    className={`p-4 ${
+      darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
+    }`}
+  >
+    <div className="flex justify-between items-center">
+      <h2 className="text-xl font-bold">{skill}</h2>
+      <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+        <X />
+      </button>
+    </div>
+    <div className="mt-4">
+      <div className="flex space-x-4">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`flex items-center space-x-2 px-3 py-2 rounded ${
+              activeTab === tab.id
+                ? 'bg-green-500 text-white'
+                : 'bg-gray-200 text-gray-700'
+            }`}
+          >
+            <tab.icon className="w-4 h-4" />
+            <span>{tab.label}</span>
+          </button>
+        ))}
+      </div>
+      <div className="mt-4">
+        {activeTab === 'path' && renderLearningPath()}
+        {activeTab === 'notes' && renderNotes()}
+        {/* Add other tab render functions here */}
+      </div>
+    </div>
+  </div>
+);
+};
+
 // Main Learning Page Component
 export default function LearningPage({ darkMode = false }) {
   const [selectedSkill, setSelectedSkill] = useState(null);
@@ -371,5 +426,4 @@ export default function LearningPage({ darkMode = false }) {
       )}
     </div>
   );
-                }
-    
+}
