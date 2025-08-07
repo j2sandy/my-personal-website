@@ -46,7 +46,8 @@ export const learningData = {
           completion: 10,
           estimatedHours: 240,
           completedHours: 24,
-          lastUpdated: new Date().toISOString()
+          lastUpdated: new Date().toISOString(),
+          notionUrl: "https://www.notion.so/AI-ML-2486b4d3ddf08086a50af4629633315c"
         }
       ],
       
