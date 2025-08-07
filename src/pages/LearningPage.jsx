@@ -1,8 +1,7 @@
 // LearningPage.jsx - Main learning dashboard component
 import { useState } from 'react';
 import { 
-  X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, 
-  FileText, ExternalLink, Filter
+  X, Book, Video, Code, ArrowLeft, MapPin, ExternalLink, Filter
 } from 'lucide-react';
 import { learningData } from '../data/learningData.js';
 
@@ -35,8 +34,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     { id: 'path', label: 'Learning Path', icon: MapPin },
     { id: 'books', label: 'Books', icon: Book },
     { id: 'courses', label: 'Courses', icon: Video },
-    { id: 'practice', label: 'Practice', icon: Code },
-    { id: 'notes', label: 'My Notes', icon: FileText }
+    { id: 'practice', label: 'Practice', icon: Code }
   ];
 
   const renderLearningPath = () => {
@@ -78,80 +76,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
           </div>
         </div>
 
-        {['Fundamentals', 'Intermediate', 'Advanced'].map((phase) => {
-          const phaseItems = data.learningPath?.filter(item => item.phase === phase) || [];
-          const phaseColors = {
-            'Fundamentals': 'green',
-            'Intermediate': 'blue',
-            'Advanced': 'purple'
-          };
-          const color = phaseColors[phase];
-          
-          if (phaseItems.length === 0) return null;
-          
-          return (
-            <div key={phase} className="space-y-3">
-              <h5 className={`font-semibold text-lg flex items-center transition-colors duration-300 ${
-                darkMode ? `text-${color}-400` : `text-${color}-700`
-              }`}>
-                <div className={`w-3 h-3 rounded-full mr-3 bg-${color}-500`}></div>
-                {phase}
-              </h5>
-              
-              {phaseItems.map((item, index) => (
-                <div key={index} className={`ml-6 p-4 rounded-lg border transition-all duration-300 hover:shadow-md ${
-                  darkMode ? 'bg-gray-700 border-gray-600 hover:bg-gray-650' : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-                }`}>
-                  <div className="flex justify-between items-start mb-2">
-                    <div className="flex-1">
-                      <div className="flex items-center mb-1">
-                        {item.completion === 100 ? (
-                          <CheckCircle className="w-5 h-5 mr-2 text-green-500" />
-                        ) : (
-                          <div className={`w-5 h-5 mr-2 rounded-full border-2 ${
-                            item.completion > 0 
-                              ? `border-${color}-500 bg-${color}-500` 
-                              : darkMode ? 'border-gray-500' : 'border-gray-300'
-                          }`}>
-                            {item.completion > 0 && item.completion < 100 && (
-                              <div className={`w-full h-full rounded-full bg-${color}-500 opacity-50`}></div>
-                            )}
-                          </div>
-                        )}
-                        <h6 className={`font-semibold transition-colors duration-300 ${
-                          darkMode ? 'text-white' : 'text-gray-800'
-                        }`}>{item.title}</h6>
-                      </div>
-                      <p className={`text-sm mb-2 transition-colors duration-300 ${
-                        darkMode ? 'text-gray-400' : 'text-gray-600'
-                      }`}>{item.description}</p>
-                      <div className="flex items-center space-x-4 text-sm">
-                        <div className="flex items-center">
-                          <Clock className={`w-4 h-4 mr-1 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
-                          <span className={`transition-colors duration-300 ${
-                            darkMode ? 'text-gray-400' : 'text-gray-600'
-                          }`}>
-                            {item.completedHours}h / {item.estimatedHours}h
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className={`text-sm font-medium ml-4 transition-colors duration-300 ${
-                        item.completion === 100 
-                          ? 'text-green-500' 
-                          : darkMode ? `text-${color}-400` : `text-${color}-600`
-                      }`}>
-                        {item.completion}%
-                      </span>
-                    </div>
-                  </div>
-                  <ProgressBar completion={item.completion} darkMode={darkMode} />
-                </div>
-              ))}
-            </div>
-          );
-        })}
       </div>
     );
   };
@@ -447,4 +371,5 @@ export default function LearningPage({ darkMode = false }) {
       )}
     </div>
   );
-}
+                }
+    
