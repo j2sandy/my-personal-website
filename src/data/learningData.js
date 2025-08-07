@@ -36,6 +36,7 @@ export const learningData = {
   
   skillDetails: {
     "AI & ML": {
+      roadmapUrl: "https://roadmap.sh/ai-data-scientist",
       learningPath: [
         {
           id: 1,
