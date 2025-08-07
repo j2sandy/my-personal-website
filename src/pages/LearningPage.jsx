@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { 
   X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, 
   FileText, ExternalLink, Search, Filter, Award, 
-  Calendar
+  Calendar, TrendingUp
 } from 'lucide-react';
 import { learningData } from '../data/learningData.js';
 
@@ -189,7 +189,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
               </div>
             </div>
             <a
-              href={data.roadmapUrl || `https://roadmap.sh/${selectedSkill?.toLowerCase()}`}
+              href={data.roadmapUrl || `https://roadmap.sh/${skill?.toLowerCase()}`}
               target="_blank"
               rel="noopener noreferrer"
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 hover:shadow-lg ${
