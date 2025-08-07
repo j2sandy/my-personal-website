@@ -2,12 +2,9 @@
 import { useState } from 'react';
 import { 
   X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, 
-  FileText, ExternalLink, Search, Filter, Award, 
-  Calendar, TrendingUp
+  FileText, ExternalLink, Search, Filter
 } from 'lucide-react';
 import { learningData } from '../data/learningData.js';
-
-// Progress tracking is read-only - managed through code only
 
 // Progress bar component
 const ProgressBar = ({ completion, darkMode, size = "default", animated = false }) => {
@@ -29,35 +26,6 @@ const ProgressBar = ({ completion, darkMode, size = "default", animated = false 
   );
 };
 
-// Statistics card component
-const StatCard = ({ icon: Icon, label, value, color = "green", darkMode, trend = null }) => (
-  <div className={`p-4 rounded-lg transition-colors duration-300 ${
-    darkMode ? 'bg-gray-700' : 'bg-gray-50'
-  }`}>
-    <div className="flex items-center justify-between">
-      <div className="flex items-center space-x-3">
-        <div className={`p-2 rounded-lg bg-${color}-500 bg-opacity-20`}>
-          <Icon className={`w-5 h-5 text-${color}-500`} />
-        </div>
-        <div>
-          <p className={`text-sm transition-colors duration-300 ${
-            darkMode ? 'text-gray-400' : 'text-gray-600'
-          }`}>{label}</p>
-          <p className={`font-semibold transition-colors duration-300 ${
-            darkMode ? 'text-white' : 'text-gray-800'
-          }`}>{value}</p>
-        </div>
-      </div>
-      {trend && (
-        <div className={`text-xs font-medium ${
-          trend > 0 ? 'text-green-500' : trend < 0 ? 'text-red-500' : 'text-gray-500'
-        }`}>
-          {trend > 0 ? '↗' : trend < 0 ? '↘' : '→'} {Math.abs(trend)}%
-        </div>
-      )}
-    </div>
-  </div>
-);
 
 // Detailed skill view component
 const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
@@ -71,23 +39,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     { id: 'practice', label: 'Practice', icon: Code },
     { id: 'notes', label: 'My Notes', icon: FileText }
   ];
-
-  const calculateOverallStats = () => {
-    const pathProgress = data.learningPath?.reduce((acc, item) => acc + item.completion, 0) / (data.learningPath?.length || 1);
-    const totalHours = data.learningPath?.reduce((acc, item) => acc + item.completedHours, 0) || 0;
-    const estimatedHours = data.learningPath?.reduce((acc, item) => acc + item.estimatedHours, 0) || 0;
-    const completedItems = [
-      ...(data.books || []),
-      ...(data.courses || []), 
-      ...(data.practice || [])
-    ].filter(item => item.completion === 100).length;
-    
-    const weeklyHours = data.dailyProgress?.slice(-7).reduce((acc, day) => acc + day.hours, 0) || 0;
-    const previousWeeklyHours = data.dailyProgress?.slice(-14, -7).reduce((acc, day) => acc + day.hours, 0) || 0;
-    const weeklyTrend = previousWeeklyHours > 0 ? ((weeklyHours - previousWeeklyHours) / previousWeeklyHours * 100) : 0;
-    
-    return { pathProgress, totalHours, estimatedHours, completedItems, weeklyHours, weeklyTrend };
-  };
 
   const renderLearningPath = () => {
     return (
