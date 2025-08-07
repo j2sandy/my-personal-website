@@ -1,4 +1,4 @@
-// LearningPage.jsx - Main learning dashboard component
+// LearningPage.jsx
 import { useState } from 'react';
 import { 
   X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, 
@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { learningData } from '../data/learningData.js';
 
-// Progress tracking is read-only - managed through code only
+
 
 // Progress bar component
 const ProgressBar = ({ completion, darkMode, size = "default", animated = false }) => {
@@ -59,7 +59,7 @@ const StatCard = ({ icon: Icon, label, value, color = "green", darkMode, trend =
   </div>
 );
 
-// Detailed skill view component
+// SkillDetailView component
 const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
@@ -89,6 +89,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     
     return { pathProgress, totalHours, estimatedHours, completedItems, weeklyHours, weeklyTrend };
   };
+
 
   const renderOverview = () => {
     const stats = calculateOverallStats();
@@ -169,6 +170,25 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   const renderLearningPath = () => {
     return (
       <div className="space-y-6">
+        {/* 🆕 Roadmap.sh Link Integration */}
+        {data.roadmapUrl && (
+          <div className="text-right mb-6">
+            <a
+              href={data.roadmapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center px-4 py-2 rounded-md font-medium text-sm transition-colors duration-300 ${
+                darkMode 
+                  ? 'bg-green-700 text-white hover:bg-green-600' 
+                  : 'bg-green-100 text-green-800 hover:bg-green-200'
+              }`}
+            >
+              View Official Roadmap
+              <ExternalLink className="w-4 h-4 ml-2" />
+            </a>
+          </div>
+        )}
+
         {['Fundamentals', 'Intermediate', 'Advanced'].map((phase) => {
           const phaseItems = data.learningPath?.filter(item => item.phase === phase) || [];
           const phaseColors = {
@@ -319,7 +339,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
       </div>
     );
   };
-
   const renderResourceList = (tabId) => {
     const items = data[tabId] || [];
     
@@ -489,7 +508,7 @@ export default function LearningPage({ darkMode = false }) {
             darkMode ? 'text-gray-400' : 'text-gray-600'
           }`}>Track your progress across skills and technologies</p>
         </div>
-             
+        
         <div className="max-w-6xl mx-auto">
           {/* Current Focus Section */}
           <div className={`rounded-xl shadow-xl p-8 mb-8 backdrop-blur-sm transition-colors duration-300 ${
@@ -615,4 +634,4 @@ export default function LearningPage({ darkMode = false }) {
       )}
     </div>
   );
-      }
+}
