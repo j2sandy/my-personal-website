@@ -1,4 +1,3 @@
-// LearningPage.jsx - Main learning dashboard component
 import { useState } from 'react';
 import { 
   X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, 
@@ -150,21 +149,16 @@ const StatCard = ({ icon: Icon, label, value, color = "green", darkMode, trend =
 // Detailed skill view component
 const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
-  const [activePathTab, setActivePathTab] = useState('books');
   const [searchTerm, setSearchTerm] = useState('');
   const [editingItem, setEditingItem] = useState(null);
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: TrendingUp },
-    { id: 'learning', label: 'Learning Path', icon: MapPin }
-  ];
-
-  const pathTabs = [
+    { id: 'path', label: 'Learning Path', icon: MapPin },
     { id: 'books', label: 'Books', icon: Book },
     { id: 'courses', label: 'Courses', icon: Video },
     { id: 'practice', label: 'Practice', icon: Code },
-    { id: 'notes', label: 'My Notes', icon: FileText },
-    { id: 'path', label: 'Learning Path', icon: MapPin }
+    { id: 'notes', label: 'My Notes', icon: FileText }
   ];
 
   const handleUpdateProgress = (updatedItem) => {
@@ -266,169 +260,169 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   };
 
   const renderLearningPath = () => {
-    if (activePathTab === 'path') {
-      return (
-        <div className="space-y-6">
-          {['Fundamentals', 'Intermediate', 'Advanced'].map((phase) => {
-            const phaseItems = data.learningPath?.filter(item => item.phase === phase) || [];
-            const phaseColors = {
-              'Fundamentals': 'green',
-              'Intermediate': 'blue',
-              'Advanced': 'purple'
-            };
-            const color = phaseColors[phase];
-            
-            if (phaseItems.length === 0) return null;
-            
-            return (
-              <div key={phase} className="space-y-3">
-                <h5 className={`font-semibold text-lg flex items-center transition-colors duration-300 ${
-                  darkMode ? `text-${color}-400` : `text-${color}-700`
+    return (
+      <div className="space-y-6">
+        {['Fundamentals', 'Intermediate', 'Advanced'].map((phase) => {
+          const phaseItems = data.learningPath?.filter(item => item.phase === phase) || [];
+          const phaseColors = {
+            'Fundamentals': 'green',
+            'Intermediate': 'blue',
+            'Advanced': 'purple'
+          };
+          const color = phaseColors[phase];
+          
+          if (phaseItems.length === 0) return null;
+          
+          return (
+            <div key={phase} className="space-y-3">
+              <h5 className={`font-semibold text-lg flex items-center transition-colors duration-300 ${
+                darkMode ? `text-${color}-400` : `text-${color}-700`
+              }`}>
+                <div className={`w-3 h-3 rounded-full mr-3 bg-${color}-500`}></div>
+                {phase}
+              </h5>
+              
+              {phaseItems.map((item, index) => (
+                <div key={index} className={`ml-6 p-4 rounded-lg border transition-all duration-300 hover:shadow-md ${
+                  darkMode ? 'bg-gray-700 border-gray-600 hover:bg-gray-650' : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
                 }`}>
-                  <div className={`w-3 h-3 rounded-full mr-3 bg-${color}-500`}></div>
-                  {phase}
-                </h5>
-                
-                {phaseItems.map((item, index) => (
-                  <div key={index} className={`ml-6 p-4 rounded-lg border transition-all duration-300 hover:shadow-md ${
-                    darkMode ? 'bg-gray-700 border-gray-600 hover:bg-gray-650' : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-                  }`}>
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="flex-1">
-                        <div className="flex items-center mb-1">
-                          {item.completion === 100 ? (
-                            <CheckCircle className="w-5 h-5 mr-2 text-green-500" />
-                          ) : (
-                            <div className={`w-5 h-5 mr-2 rounded-full border-2 ${
-                              item.completion > 0 
-                                ? `border-${color}-500 bg-${color}-500` 
-                                : darkMode ? 'border-gray-500' : 'border-gray-300'
-                            }`}>
-                              {item.completion > 0 && item.completion < 100 && (
-                                <div className={`w-full h-full rounded-full bg-${color}-500 opacity-50`}></div>
-                              )}
-                            </div>
-                          )}
-                          <h6 className={`font-semibold transition-colors duration-300 ${
-                            darkMode ? 'text-white' : 'text-gray-800'
-                          }`}>{item.title}</h6>
-                        </div>
-                        <p className={`text-sm mb-2 transition-colors duration-300 ${
-                          darkMode ? 'text-gray-400' : 'text-gray-600'
-                        }`}>{item.description}</p>
-                        <div className="flex items-center space-x-4 text-sm">
-                          <div className="flex items-center">
-                            <Clock className={`w-4 h-4 mr-1 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
-                            <span className={`transition-colors duration-300 ${
-                              darkMode ? 'text-gray-400' : 'text-gray-600'
-                            }`}>
-                              {item.completedHours}h / {item.estimatedHours}h
-                            </span>
+                  <div className="flex justify-between items-start mb-2">
+                    <div className="flex-1">
+                      <div className="flex items-center mb-1">
+                        {item.completion === 100 ? (
+                          <CheckCircle className="w-5 h-5 mr-2 text-green-500" />
+                        ) : (
+                          <div className={`w-5 h-5 mr-2 rounded-full border-2 ${
+                            item.completion > 0 
+                              ? `border-${color}-500 bg-${color}-500` 
+                              : darkMode ? 'border-gray-500' : 'border-gray-300'
+                          }`}>
+                            {item.completion > 0 && item.completion < 100 && (
+                              <div className={`w-full h-full rounded-full bg-${color}-500 opacity-50`}></div>
+                            )}
                           </div>
-                        </div>
+                        )}
+                        <h6 className={`font-semibold transition-colors duration-300 ${
+                          darkMode ? 'text-white' : 'text-gray-800'
+                        }`}>{item.title}</h6>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <button
-                          onClick={() => setEditingItem(item)}
-                          className={`p-1 rounded transition-colors duration-300 ${
-                            darkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-600'
-                          }`}
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </button>
-                        <span className={`text-sm font-medium ml-4 transition-colors duration-300 ${
-                          item.completion === 100 
-                            ? 'text-green-500' 
-                            : darkMode ? `text-${color}-400` : `text-${color}-600`
-                        }`}>
-                          {item.completion}%
-                        </span>
+                      <p className={`text-sm mb-2 transition-colors duration-300 ${
+                        darkMode ? 'text-gray-400' : 'text-gray-600'
+                      }`}>{item.description}</p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <div className="flex items-center">
+                          <Clock className={`w-4 h-4 mr-1 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
+                          <span className={`transition-colors duration-300 ${
+                            darkMode ? 'text-gray-400' : 'text-gray-600'
+                          }`}>
+                            {item.completedHours}h / {item.estimatedHours}h
+                          </span>
+                        </div>
                       </div>
                     </div>
-                    <ProgressBar completion={item.completion} darkMode={darkMode} />
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => setEditingItem(item)}
+                        className={`p-1 rounded transition-colors duration-300 ${
+                          darkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-600'
+                        }`}
+                      >
+                        <Edit2 className="w-4 h-4" />
+                      </button>
+                      <span className={`text-sm font-medium ml-4 transition-colors duration-300 ${
+                        item.completion === 100 
+                          ? 'text-green-500' 
+                          : darkMode ? `text-${color}-400` : `text-${color}-600`
+                      }`}>
+                        {item.completion}%
+                      </span>
+                    </div>
                   </div>
-                ))}
-              </div>
-            );
-          })}
+                  <ProgressBar completion={item.completion} darkMode={darkMode} />
+                </div>
+              ))}
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const renderNotes = () => {
+    const filteredNotes = data.notes?.filter(note => 
+      note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      note.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      note.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+    ) || [];
+
+    return (
+      <div className="space-y-4">
+        <div className="relative">
+          <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 ${
+            darkMode ? 'text-gray-400' : 'text-gray-500'
+          }`} />
+          <input
+            type="text"
+            placeholder="Search notes..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={`w-full pl-10 pr-4 py-2 rounded-lg border transition-colors duration-300 ${
+              darkMode 
+                ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
+                : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+            }`}
+          />
         </div>
-      );
-    }
 
-    if (activePathTab === 'notes') {
-      const filteredNotes = data.notes?.filter(note => 
-        note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        note.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        note.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-      ) || [];
-
-      return (
-        <div className="space-y-4">
-          <div className="relative">
-            <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 ${
-              darkMode ? 'text-gray-400' : 'text-gray-500'
-            }`} />
-            <input
-              type="text"
-              placeholder="Search notes..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className={`w-full pl-10 pr-4 py-2 rounded-lg border transition-colors duration-300 ${
-                darkMode 
-                  ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
-                  : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-              }`}
-            />
-          </div>
-
-          {filteredNotes.map((note, index) => (
-            <div key={index} className={`p-4 rounded-lg border transition-all duration-300 hover:shadow-md ${
-              darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'
-            }`}>
-              <div className="flex justify-between items-start mb-2">
-                <h4 className={`font-semibold transition-colors duration-300 ${
-                  darkMode ? 'text-white' : 'text-gray-800'
-                }`}>{note.title}</h4>
-                <span className={`text-xs transition-colors duration-300 ${
-                  darkMode ? 'text-gray-400' : 'text-gray-500'
-                }`}>
-                  {new Date(note.createdAt).toLocaleDateString()}
+        {filteredNotes.map((note, index) => (
+          <div key={index} className={`p-4 rounded-lg border transition-all duration-300 hover:shadow-md ${
+            darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'
+          }`}>
+            <div className="flex justify-between items-start mb-2">
+              <h4 className={`font-semibold transition-colors duration-300 ${
+                darkMode ? 'text-white' : 'text-gray-800'
+              }`}>{note.title}</h4>
+              <span className={`text-xs transition-colors duration-300 ${
+                darkMode ? 'text-gray-400' : 'text-gray-500'
+              }`}>
+                {new Date(note.createdAt).toLocaleDateString()}
+              </span>
+            </div>
+            <p className={`text-sm mb-3 leading-relaxed transition-colors duration-300 ${
+              darkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}>{note.content}</p>
+            <div className="flex flex-wrap gap-2">
+              {note.tags.map((tag, tagIndex) => (
+                <span
+                  key={tagIndex}
+                  className={`px-2 py-1 text-xs rounded-full transition-colors duration-300 ${
+                    darkMode 
+                      ? 'bg-blue-900 text-blue-300 border border-blue-700' 
+                      : 'bg-blue-100 text-blue-700'
+                  }`}
+                >
+                  #{tag}
                 </span>
-              </div>
-              <p className={`text-sm mb-3 leading-relaxed transition-colors duration-300 ${
-                darkMode ? 'text-gray-300' : 'text-gray-700'
-              }`}>{note.content}</p>
-              <div className="flex flex-wrap gap-2">
-                {note.tags.map((tag, tagIndex) => (
-                  <span
-                    key={tagIndex}
-                    className={`px-2 py-1 text-xs rounded-full transition-colors duration-300 ${
-                      darkMode 
-                        ? 'bg-blue-900 text-blue-300 border border-blue-700' 
-                        : 'bg-blue-100 text-blue-700'
-                    }`}
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+        ))}
 
-          {filteredNotes.length === 0 && (
-            <div className={`text-center py-8 transition-colors duration-300 ${
-              darkMode ? 'text-gray-400' : 'text-gray-500'
-            }`}>
-              <FileText className="w-12 h-12 mx-auto mb-3 opacity-50" />
-              <p>No notes found</p>
-              <p className="text-sm mt-1">Try adjusting your search terms</p>
-            </div>
-          )}
-        </div>
-      );
-    }
+        {filteredNotes.length === 0 && (
+          <div className={`text-center py-8 transition-colors duration-300 ${
+            darkMode ? 'text-gray-400' : 'text-gray-500'
+          }`}>
+            <FileText className="w-12 h-12 mx-auto mb-3 opacity-50" />
+            <p>No notes found</p>
+            <p className="text-sm mt-1">Try adjusting your search terms</p>
+          </div>
+        )}
+      </div>
+    );
+  };
 
-    const items = data[activePathTab] || [];
+  const renderResourceList = (tabId) => {
+    const items = data[tabId] || [];
     
     return (
       <div className="space-y-4">
@@ -450,7 +444,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
                       className={`p-1 rounded transition-colors duration-300 hover:bg-opacity-80 ${
                         darkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-500'
                       }`}
-                 title="Open external link"
+                      title="Open external link"
                     >
                       <ExternalLink className="w-4 h-4" />
                     </a>
@@ -495,46 +489,21 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     );
   };
 
+  
   const renderContent = () => {
-    if (activeTab === 'overview') {
-      return renderOverview();
-    }
-
-    if (activeTab === 'learning') {
-      return (
-        <div className="space-y-6">
-          {/* Path Sub-tabs */}
-          <div className={`border-b transition-colors duration-300 ${
-            darkMode ? 'border-gray-600' : 'border-gray-200'
-          }`}>
-            <div className="flex space-x-6 overflow-x-auto">
-              {pathTabs.map((tab) => {
-                const Icon = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActivePathTab(tab.id)}
-                    className={`py-3 px-3 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-300 ${
-                      activePathTab === tab.id
-                        ? 'border-green-500 text-green-500'
-                        : `border-transparent ${
-                            darkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'
-                          }`
-                    }`}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <Icon className="w-4 h-4" />
-                      <span>{tab.label}</span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {renderLearningPath()}
-        </div>
-      );
+    switch (activeTab) {
+      case 'overview':
+        return renderOverview();
+      case 'path':
+        return renderLearningPath();
+      case 'notes':
+        return renderNotes();
+      case 'books':
+      case 'courses':
+      case 'practice':
+        return renderResourceList(activeTab);
+      default:
+        return renderOverview();
     }
   };
 
@@ -766,4 +735,4 @@ export default function LearningPage({ darkMode = false }) {
       )}
     </div>
   );
-      }
+}
