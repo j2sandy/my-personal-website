@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { 
   X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, 
-  FileText, ExternalLink, Search, Filter
+  FileText, ExternalLink, Filter
 } from 'lucide-react';
 import { learningData } from '../data/learningData.js';
 
@@ -30,7 +30,6 @@ const ProgressBar = ({ completion, darkMode, size = "default", animated = false 
 // Detailed skill view component
 const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   const [activeTab, setActiveTab] = useState('path');
-  const [searchTerm, setSearchTerm] = useState('');
 
   const tabs = [
     { id: 'path', label: 'Learning Path', icon: MapPin },
