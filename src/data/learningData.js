@@ -38,19 +38,6 @@ export const learningData = {
     "AI & ML": {
       roadmapUrl: "https://roadmap.sh/ai-data-scientist",
       notionUrl: "https://www.notion.so/AI-ML-2486b4d3ddf08086a50af4629633315c",
-      learningPath: [
-        {
-          id: 1,
-          title: "Introductory AI",
-          description: "Learn basics of AI",
-          phase: "Fundamentals",
-          completion: 10,
-          estimatedHours: 240,
-          completedHours: 24,
-          lastUpdated: new Date().toISOString()
-        }
-      ],
-      
       books: [
         {
           id: 1,
@@ -103,31 +90,15 @@ export const learningData = {
           lastWorked: new Date().toISOString()
         }
       ],
-      
-      notes: [
-        {
-          id: 1,
-          title: "Supervised Learning",
-          content: "Key insights on React.memo, useMemo, and useCallback. Remember that premature optimization can hurt readability. Focus on identifying actual performance bottlenecks first.",
-          createdAt: "2025-08-06",
-          updatedAt: new Date().toISOString(),
-          tags: ["ai", "supervised learning"]
-        }
-      ],
+    },
+    "DSA": {
+      roadmapUrl: "https://roadmap.sh/datastructures-and-algorithms",
+      notionUrl: "https://www.notion.so/DSA-1046b4d3ddf080bdab16cadec7061419",
+      books : [],
+      courses: [],
+      practice: []
     }
   },
-  
-  goals: [
-    {
-      id: 1,
-      title: "Complete Introductory AI",
-      skill: "AI & ML",
-      targetDate: "2025-08-16",
-      progress: 25,
-      type: "course",
-      description: "Finish the introductory AI"
-    }
-  ],
   
   // Helper functions for data manipulation
   getTotalStudyHours: function() {
@@ -196,3 +167,4 @@ export const learningData = {
 };
 
 export default learningData;
+  
