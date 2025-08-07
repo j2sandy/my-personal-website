@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, ArrowLeft, ExternalLink, FileText } from 'lucide-react';
-import { learningData } from './learningData';
+import { learningData } from '../data/learningData';
 
 const StatCard = ({ title, value, darkMode }) => (
   <div className={`p-4 rounded-lg shadow-md ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
