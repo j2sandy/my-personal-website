@@ -1,100 +1,13 @@
+// LearningPage.jsx - Main learning dashboard component
 import { useState } from 'react';
 import { 
   X, Book, Video, Code, ArrowLeft, MapPin, Clock, CheckCircle, 
   FileText, ExternalLink, Search, Filter, TrendingUp, Award, 
-  Calendar, Edit2
+  Calendar
 } from 'lucide-react';
 import { learningData } from '../data/learningData.js';
 
-// Progress update modal
-const ProgressUpdateModal = ({ item, onUpdate, onClose, darkMode }) => {
-  const [completion, setCompletion] = useState(item.completion);
-  const [hoursToAdd, setHoursToAdd] = useState(0);
-
-  const handleSave = () => {
-    onUpdate({
-      ...item,
-      completion: Math.min(100, Math.max(0, completion)),
-      completedHours: item.completedHours + hoursToAdd,
-      lastUpdated: new Date().toISOString()
-    });
-    onClose();
-  };
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className={`max-w-md w-full rounded-lg p-6 transition-colors duration-300 ${
-        darkMode ? 'bg-gray-800' : 'bg-white'
-      }`}>
-        <h3 className={`text-lg font-semibold mb-4 transition-colors duration-300 ${
-          darkMode ? 'text-white' : 'text-gray-800'
-        }`}>Update Progress: {item.title}</h3>
-        
-        <div className="space-y-4">
-          <div>
-            <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-              darkMode ? 'text-gray-300' : 'text-gray-700'
-            }`}>
-              Completion Percentage
-            </label>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={completion}
-              onChange={(e) => setCompletion(parseInt(e.target.value))}
-              className="w-full"
-            />
-            <div className="text-center mt-1">
-              <span className={`text-lg font-semibold transition-colors duration-300 ${
-                darkMode ? 'text-green-400' : 'text-green-600'
-              }`}>{completion}%</span>
-            </div>
-          </div>
-
-          <div>
-            <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-              darkMode ? 'text-gray-300' : 'text-gray-700'
-            }`}>
-              Hours to Add
-            </label>
-            <input
-              type="number"
-              step="0.5"
-              min="0"
-              value={hoursToAdd}
-              onChange={(e) => setHoursToAdd(parseFloat(e.target.value) || 0)}
-              className={`w-full px-3 py-2 rounded border transition-colors duration-300 ${
-                darkMode 
-                  ? 'bg-gray-700 border-gray-600 text-white' 
-                  : 'bg-white border-gray-300 text-gray-800'
-              }`}
-            />
-          </div>
-        </div>
-
-        <div className="flex justify-end space-x-3 mt-6">
-          <button
-            onClick={onClose}
-            className={`px-4 py-2 rounded font-medium transition-colors duration-300 ${
-              darkMode 
-                ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
-            }`}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleSave}
-            className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded font-medium transition-colors duration-300"
-          >
-            Save Progress
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+// Progress tracking is read-only - managed through code only
 
 // Progress bar component
 const ProgressBar = ({ completion, darkMode, size = "default", animated = false }) => {
@@ -150,7 +63,6 @@ const StatCard = ({ icon: Icon, label, value, color = "green", darkMode, trend =
 const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
-  const [editingItem, setEditingItem] = useState(null);
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: TrendingUp },
@@ -160,11 +72,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     { id: 'practice', label: 'Practice', icon: Code },
     { id: 'notes', label: 'My Notes', icon: FileText }
   ];
-
-  const handleUpdateProgress = (updatedItem) => {
-    alert(`Progress updated for: ${updatedItem.title}\nCompletion: ${updatedItem.completion}%`);
-    setEditingItem(null);
-  };
 
   const calculateOverallStats = () => {
     const pathProgress = data.learningPath?.reduce((acc, item) => acc + item.completion, 0) / (data.learningPath?.length || 1);
@@ -321,14 +228,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <button
-                        onClick={() => setEditingItem(item)}
-                        className={`p-1 rounded transition-colors duration-300 ${
-                          darkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-600'
-                        }`}
-                      >
-                        <Edit2 className="w-4 h-4" />
-                      </button>
                       <span className={`text-sm font-medium ml-4 transition-colors duration-300 ${
                         item.completion === 100 
                           ? 'text-green-500' 
@@ -467,14 +366,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
                 )}
               </div>
               <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => setEditingItem(item)}
-                  className={`p-1 rounded transition-colors duration-300 ${
-                    darkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-600'
-                  }`}
-                >
-                  <Edit2 className="w-4 h-4" />
-                </button>
                 <span className={`text-sm font-medium transition-colors duration-300 ${
                   darkMode ? 'text-green-400' : 'text-green-600'
                 }`}>
@@ -489,7 +380,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     );
   };
 
-  
   const renderContent = () => {
     switch (activeTab) {
       case 'overview':
@@ -575,16 +465,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
           {renderContent()}
         </div>
       </div>
-
-      {/* Progress Update Modal */}
-      {editingItem && (
-        <ProgressUpdateModal
-          item={editingItem}
-          onUpdate={handleUpdateProgress}
-          onClose={() => setEditingItem(null)}
-          darkMode={darkMode}
-        />
-      )}
     </div>
   );
 };
@@ -609,7 +489,7 @@ export default function LearningPage({ darkMode = false }) {
             darkMode ? 'text-gray-400' : 'text-gray-600'
           }`}>Track your progress across skills and technologies</p>
         </div>
-        
+             
         <div className="max-w-6xl mx-auto">
           {/* Current Focus Section */}
           <div className={`rounded-xl shadow-xl p-8 mb-8 backdrop-blur-sm transition-colors duration-300 ${
@@ -735,4 +615,4 @@ export default function LearningPage({ darkMode = false }) {
       )}
     </div>
   );
-}
+      }
