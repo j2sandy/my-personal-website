@@ -157,111 +157,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     );
   };
 
-  const renderNotes = () => {
-    const filteredNotes = data.notes?.filter(note => 
-      note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      note.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      note.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-    ) || [];
-
-    return (
-      <div className="space-y-4">
-        <div className="flex items-center space-x-4">
-          <div className="relative flex-1">
-            <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 ${
-              darkMode ? 'text-gray-400' : 'text-gray-500'
-            }`} />
-            <input
-              type="text"
-              placeholder="Search notes..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className={`w-full pl-10 pr-4 py-2 rounded-lg border transition-colors duration-300 ${
-                darkMode 
-                  ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
-                  : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-              }`}
-            />
-          </div>
-          {data.notionUrl && (
-            <a
-              href={data.notionUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 hover:shadow-lg ${
-                darkMode 
-                  ? 'bg-gray-600 hover:bg-gray-500 text-white border border-gray-500' 
-                  : 'bg-white hover:bg-gray-50 text-gray-700 border border-gray-300'
-              }`}
-            >
-              <span className="text-sm font-medium">View in Notion</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          )}
-        </div>
-
-        {filteredNotes.map((note, index) => (
-          <div key={index} className={`p-4 rounded-lg border transition-all duration-300 hover:shadow-md ${
-            darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'
-          }`}>
-            <div className="flex justify-between items-start mb-2">
-              <div className="flex items-center space-x-2">
-                <h4 className={`font-semibold transition-colors duration-300 ${
-                  darkMode ? 'text-white' : 'text-gray-800'
-                }`}>{note.title}</h4>
-                {note.notionUrl && (
-                  <a
-                    href={note.notionUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`p-1 rounded transition-colors duration-300 hover:bg-opacity-80 ${
-                      darkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-500'
-                    }`}
-                    title="Open in Notion"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                )}
-              </div>
-              <span className={`text-xs transition-colors duration-300 ${
-                darkMode ? 'text-gray-400' : 'text-gray-500'
-              }`}>
-                {new Date(note.createdAt).toLocaleDateString()}
-              </span>
-            </div>
-            <p className={`text-sm mb-3 leading-relaxed transition-colors duration-300 ${
-              darkMode ? 'text-gray-300' : 'text-gray-700'
-            }`}>{note.content}</p>
-            <div className="flex flex-wrap gap-2">
-              {note.tags.map((tag, tagIndex) => (
-                <span
-                  key={tagIndex}
-                  className={`px-2 py-1 text-xs rounded-full transition-colors duration-300 ${
-                    darkMode 
-                      ? 'bg-blue-900 text-blue-300 border border-blue-700' 
-                      : 'bg-blue-100 text-blue-700'
-                  }`}
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
-
-        {filteredNotes.length === 0 && (
-          <div className={`text-center py-8 transition-colors duration-300 ${
-            darkMode ? 'text-gray-400' : 'text-gray-500'
-          }`}>
-            <FileText className="w-12 h-12 mx-auto mb-3 opacity-50" />
-            <p>No notes found</p>
-            <p className="text-sm mt-1">Try adjusting your search terms</p>
-          </div>
-        )}
-      </div>
-    );
-  };
-
   const renderResourceList = (tabId) => {
     const items = data[tabId] || [];
     
@@ -326,8 +221,6 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     switch (activeTab) {
       case 'path':
         return renderLearningPath();
-      case 'notes':
-        return renderNotes();
       case 'books':
       case 'courses':
       case 'practice':
