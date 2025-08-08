@@ -14,8 +14,9 @@ export default function TypewriterText({ text = "", speed = 30 }) {
         clearInterval(interval);
       }
     }, speed);
+
     return () => clearInterval(interval);
-  }, [text]);
+  }, [text, speed]); // ✅ Now includes speed
 
   return <p className="text-center text-xl leading-relaxed">{displayed}</p>;
 }
