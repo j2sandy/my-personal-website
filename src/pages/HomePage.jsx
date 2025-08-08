@@ -9,46 +9,21 @@ export default function HomePage({ darkMode, onPageChange }) {
   useEffect(() => {
     async function loadShloka() {
       const result = await fetchDailyShloka();
-      if (result) setShloka(result);
+      setShloka(result);
       setLoading(false);
     }
     loadShloka();
   }, []);
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${
+    <div className={`min-h-screen flex flex-col justify-between transition-colors duration-300 ${
       darkMode 
         ? 'bg-gradient-to-br from-gray-900 to-gray-800' 
         : 'bg-gradient-to-br from-blue-50 to-indigo-100'
     }`}>
-      <div className="container mx-auto px-6 py-20">
 
-        {/* --- SHLOKA SECTION --- */}
-        {!loading && shloka && (
-          <div className="text-center mb-16">
-            {shloka.imageUrl && (
-              <img 
-                src={shloka.imageUrl} 
-                alt="Shloka illustration" 
-                className="w-40 h-40 mx-auto mb-4 rounded-full object-cover shadow-md"
-              />
-            )}
-            <p className={`text-xl font-semibold italic ${
-              darkMode ? 'text-white' : 'text-gray-800'
-            }`}>
-              “{shloka.text}”
-            </p>
-            {shloka.translation && (
-              <p className={`text-sm mt-2 ${
-                darkMode ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                {shloka.translation}
-              </p>
-            )}
-          </div>
-        )}
-
-        {/* --- EXISTING CONTENT --- */}
+      <div className="container mx-auto px-6 py-20 flex-grow">
+        {/* Main Content */}
         <div className="text-center">
           <div className="w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mx-auto mb-8 flex items-center justify-center shadow-xl">
             <span className="text-4xl font-bold text-white">NS</span>
@@ -95,6 +70,25 @@ export default function HomePage({ darkMode, onPageChange }) {
           </div>
         </div>
       </div>
+
+      {/* === SHLOKA SECTION ABOVE FOOTER === */}
+      {!loading && shloka && (
+        <div className={`py-10 px-4 text-center ${
+          darkMode ? 'bg-gray-900 text-gray-200' : 'bg-white text-gray-800'
+        }`}>
+          <div className="max-w-3xl mx-auto">
+            <img 
+              src={shloka.imageUrl}
+              alt="Sanskrit-themed visual"
+              className="w-full h-64 object-cover rounded-lg shadow mb-6 mx-auto"
+            />
+            <p className="text-2xl italic font-serif mb-2">“{shloka.text}”</p>
+            <p className="text-md text-gray-500">{shloka.translation}</p>
+          </div>
+        </div>
+      )}
+
+      {/* === FOOTER (can be added below here if needed) === */}
     </div>
   );
-                  }
+            }
