@@ -1,7 +1,20 @@
-
+import { useState, useEffect } from 'react';
 import { navigationItems, getPageDescription } from '../data/navigation';
+import { fetchDailyShloka } from '../services/shlokaService';
 
 export default function HomePage({ darkMode, onPageChange }) {
+  const [shloka, setShloka] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadShloka() {
+      const result = await fetchDailyShloka();
+      if (result) setShloka(result);
+      setLoading(false);
+    }
+    loadShloka();
+  }, []);
+
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
       darkMode 
@@ -9,6 +22,33 @@ export default function HomePage({ darkMode, onPageChange }) {
         : 'bg-gradient-to-br from-blue-50 to-indigo-100'
     }`}>
       <div className="container mx-auto px-6 py-20">
+
+        {/* --- SHLOKA SECTION --- */}
+        {!loading && shloka && (
+          <div className="text-center mb-16">
+            {shloka.imageUrl && (
+              <img 
+                src={shloka.imageUrl} 
+                alt="Shloka illustration" 
+                className="w-40 h-40 mx-auto mb-4 rounded-full object-cover shadow-md"
+              />
+            )}
+            <p className={`text-xl font-semibold italic ${
+              darkMode ? 'text-white' : 'text-gray-800'
+            }`}>
+              “{shloka.text}”
+            </p>
+            {shloka.translation && (
+              <p className={`text-sm mt-2 ${
+                darkMode ? 'text-gray-400' : 'text-gray-600'
+              }`}>
+                {shloka.translation}
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* --- EXISTING CONTENT --- */}
         <div className="text-center">
           <div className="w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mx-auto mb-8 flex items-center justify-center shadow-xl">
             <span className="text-4xl font-bold text-white">NS</span>
@@ -26,6 +66,7 @@ export default function HomePage({ darkMode, onPageChange }) {
             and building meaningful projects. This is where I share my journey, insights, and 
             the things that inspire me every day.
           </p>
+
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {navigationItems.slice(1).map((item) => {
               const Icon = item.icon;
@@ -56,4 +97,4 @@ export default function HomePage({ darkMode, onPageChange }) {
       </div>
     </div>
   );
-}
+                  }
