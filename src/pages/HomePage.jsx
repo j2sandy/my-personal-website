@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { navigationItems, getPageDescription } from '../data/navigation';
-import { fetchShloka } from '../services/ShlokaService';
+import { fetchShloka } from '../services/shlokaService';
 import TypewriterText from './TypewriterText';
 
 export default function HomePage({ darkMode, onPageChange }) {
