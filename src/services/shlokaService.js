@@ -1,16 +1,17 @@
+// services/shlokaService.js
+
 const SHLOKA_API_URL = 'https://shloka.onrender.com/api/v1/bahgavad_gita/random';
-const IMAGE_API_URL = 'https://source.unsplash.com/600x400/?india,sanskrit,temple,yoga';
+const IMAGE_API_URL = 'https://source.unsplash.com/800x400/?sanskrit,temple,yoga,india';
 
 const fallbackShloka = {
   text: "सा विद्या या विमुक्तये ।",
   translation: "That is knowledge which liberates.",
-  imageUrl: '/fallbacks/shloka.jpg', // Put an image in public/fallbacks/shloka.jpg
+  imageUrl: '/fallbacks/shloka.jpg',
 };
 
 export async function fetchDailyShloka() {
   let shlokaText = fallbackShloka.text;
   let translation = fallbackShloka.translation;
-  let imageUrl = fallbackShloka.imageUrl;
 
   try {
     const response = await fetch(SHLOKA_API_URL);
@@ -25,16 +26,9 @@ export async function fetchDailyShloka() {
     console.warn('Failed to fetch shloka:', error);
   }
 
-  try {
-    // Unsplash returns a redirect to a random image, so we just use the URL directly
-    imageUrl = IMAGE_API_URL;
-  } catch (error) {
-    console.warn('Failed to fetch image:', error);
-  }
-
   return {
     text: shlokaText,
     translation,
-    imageUrl,
+    imageUrl: IMAGE_API_URL, // always use as <img src="...">
   };
 }
