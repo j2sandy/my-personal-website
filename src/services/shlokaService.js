@@ -1,34 +1,17 @@
-// services/shlokaService.js
-
-const SHLOKA_API_URL = 'https://shloka.onrender.com/api/v1/bahgavad_gita/random';
-const IMAGE_API_URL = 'https://source.unsplash.com/800x400/?sanskrit,temple,yoga,india';
-
-const fallbackShloka = {
-  text: "सा विद्या या विमुक्तये ।",
-  translation: "That is knowledge which liberates.",
-  imageUrl: '/fallbacks/shloka.jpg',
-};
-
-export async function fetchDailyShloka() {
-  let shlokaText = fallbackShloka.text;
-  let translation = fallbackShloka.translation;
-
+// services/ShlokaService.js
+export async function fetchShloka() {
   try {
-    const response = await fetch(SHLOKA_API_URL);
-    if (!response.ok) throw new Error('Shloka fetch failed');
-    const data = await response.json();
-
-    if (data?.slok) {
-      shlokaText = data.slok;
-      translation = data.translation || fallbackShloka.translation;
-    }
+    const response = await fetch("https://shloka.onrender.com/api/v1/bahgavad_gita/random");
+    if (!response.ok) throw new Error("Failed to fetch shloka");
+    return await response.json();
   } catch (error) {
-    console.warn('Failed to fetch shloka:', error);
+    console.error("Shloka fetch failed:", error);
+    return {
+      Shloka: "श्लोक प्राप्त नहीं हो पाया। कृपया पुनः प्रयास करें।",
+      Chapter: "",
+      "Verse No": "",
+      Explanation: "",
+      "English Translation": ""
+    };
   }
-
-  return {
-    text: shlokaText,
-    translation,
-    imageUrl: IMAGE_API_URL, // always use as <img src="...">
-  };
 }
