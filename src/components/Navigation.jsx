@@ -17,6 +17,12 @@ export default function Navigation({
   };
 
   const handleNavClick = (pageId) => {
+    // Handle resume PDF separately
+    if (pageId === 'resume') {
+      window.open('/resume.pdf', '_blank');
+      return;
+    }
+    
     setCurrentPage(pageId);
     setMobileMenuOpen(false);
   };
@@ -35,7 +41,7 @@ export default function Navigation({
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse"></div>
           </div>
           <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-extrabold">
-            Nitin
+            My Personal Website
           </span>
         </button>
 
@@ -46,7 +52,7 @@ export default function Navigation({
               <button
                 onClick={() => handleNavClick(item.id)}
                 className={`flex items-center space-x-1 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 ${
-                  currentPage === item.id ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-semibold' : 'hover:text-blue-500'
+                  currentPage === item.id && item.id !== 'resume' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-semibold' : 'hover:text-blue-500'
                 }`}
               >
                 {item.icon && <item.icon size={18} />}
@@ -106,7 +112,7 @@ export default function Navigation({
                 <button
                   onClick={() => !item.subpages && handleNavClick(item.id)}
                   className={`flex items-center space-x-2 ${
-                    currentPage === item.id ? 'font-semibold text-blue-500' : ''
+                    currentPage === item.id && item.id !== 'resume' ? 'font-semibold text-blue-500' : ''
                   }`}
                 >
                   {item.icon && <item.icon size={18} />}
