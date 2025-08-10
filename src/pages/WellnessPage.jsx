@@ -2,6 +2,7 @@
 import React from 'react';
 import { Heart, ChevronRight, Sparkles } from 'lucide-react';
 import { wellnessPillars } from '../data/wellnessData';
+import JourneyTimeline from '../components/JourneyTimeline';
 
 export default function WellnessPage({ darkMode }) {
   return (
@@ -87,17 +88,9 @@ export default function WellnessPage({ darkMode }) {
           ))}
         </div>
 
-        {/* Bottom CTA Section */}
-        <div className={`mt-16 text-center p-8 rounded-2xl ${darkMode ? 'bg-gray-800' : 'bg-white'} border-2 ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-          <h2 className={`text-3xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-            Start Your Wellness Journey Today
-          </h2>
-          <p className={`text-lg mb-6 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Balance all five pillars to achieve optimal health and well-being
-          </p>
-          <button className="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold rounded-xl hover:scale-105 transition-transform duration-200 shadow-lg">
-            Explore Wellness Resources
-          </button>
+        {/* My Journey Section */}
+        <div className="mt-16">
+          <JourneyTimeline darkMode={darkMode} />
         </div>
       </div>
     </div>
