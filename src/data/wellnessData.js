@@ -1,5 +1,5 @@
 // src/data/wellnessData.js
-export const wellnessPillars = [
+export const wellnessData = [
   {
     id: "sleep",
     title: "Sleep",
