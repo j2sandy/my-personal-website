@@ -1,43 +1,53 @@
-// App.jsx
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
-import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import LearningPage from './pages/LearningPage';
-import ProjectsPage from './pages/ProjectsPage';
-import BlogPage from './pages/BlogPage';
-import WellnessPage from './pages/WellnessPage';
-import WellnessPillarPage from './pages/WellnessPillarPage'; // new dynamic subpage
-import { useTheme } from './hooks/useTheme';
-import { navigationItems } from './data/navigation';
+import { navigation } from './data/navigationItems';
 
-export default function PersonalWebsite() {
-  const { darkMode, toggleDarkMode } = useTheme();
+// Import your page components
+import Home from './pages/Home';
+import Learning from './pages/Learning';
+import Wellness from './pages/Wellness';
+import CalendarPage from './pages/Calendar';
+import Meditation from './pages/wellness/Meditation';
+import Fitness from './pages/wellness/Fitness';
+import Nutrition from './pages/wellness/Nutrition';
+import MentalHealth from './pages/wellness/MentalHealth';
+
+export default function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   return (
     <Router>
-      <div className="min-h-screen">
+      <div className={darkMode ? 'dark bg-gray-900 text-white min-h-screen' : 'bg-white text-gray-900 min-h-screen'}>
+        
+        {/* Navigation */}
         <Navigation
-          navigation={navigationItems}
+          navigation={navigation}
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
         />
 
-        <div className="pt-16">
+        {/* Main Content */}
+        <div className="pt-16 px-4 max-w-7xl mx-auto">
           <Routes>
-            <Route path="/" element={<HomePage darkMode={darkMode} />} />
-            <Route path="/learning" element={<LearningPage darkMode={darkMode} />} />
-            <Route path="/projects" element={<ProjectsPage darkMode={darkMode} />} />
-            <Route path="/blog" element={<BlogPage darkMode={darkMode} />} />
-            <Route path="/wellness" element={<WellnessPage darkMode={darkMode} />} />
-            <Route
-              path="/wellness/:pillarId"
-              element={<WellnessPillarPage darkMode={darkMode} />}
-            />
+            {/* Main Pages */}
+            <Route path="/" element={<Home />} />
+            <Route path="/learning" element={<Learning />} />
+            <Route path="/wellness" element={<Wellness />} />
+            <Route path="/calendar" element={<CalendarPage />} />
+
+            {/* Wellness Subpages */}
+            <Route path="/wellness/meditation" element={<Meditation />} />
+            <Route path="/wellness/fitness" element={<Fitness />} />
+            <Route path="/wellness/nutrition" element={<Nutrition />} />
+            <Route path="/wellness/mental-health" element={<MentalHealth />} />
+
+            {/* 404 Fallback */}
+            <Route path="*" element={<h1>Page Not Found</h1>} />
           </Routes>
         </div>
-
-        <Footer darkMode={darkMode} />
       </div>
     </Router>
   );
