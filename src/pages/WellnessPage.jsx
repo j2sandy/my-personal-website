@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { wellnessPillars } from "../data/wellnessData";
+import { wellnessData } from "../data/wellnessData";
 
 export default function WellnessPage() {
   return (
