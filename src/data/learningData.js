@@ -94,9 +94,152 @@ export const learningData = {
     "DSA": {
       roadmapUrl: "https://roadmap.sh/datastructures-and-algorithms",
       notionUrl: "https://www.notion.so/DSA-1046b4d3ddf080bdab16cadec7061419",
-      books : [],
-      courses: [],
-      practice: []
+      books : [
+        {
+        id: 1,
+        title: "Cracking the coding interview",
+        author: "Gayle Laakmann McDowell",
+        completion: 50,
+        timeSpent: 100,
+        lastRead: new Date().toISOString()
+        },
+        {
+          id: 2,
+          title: "Coding Interview Patterns",
+          author: "Alex Xu",
+          completion: 90,
+          timeSpent: 240,
+          lastRead: new Date().toISOString()
+        },
+        {
+          id: 2,
+          title: "Introduction to Algorithms",
+          author: "Cormen",
+          completion: 20,
+          timeSpent: 240,
+          lastRead: new Date().toISOString()
+        }
+      ],
+      courses: [
+        {
+          id: 1,
+          title: "Algorithms Part 1",
+          platform: "Coursera",
+          completion: 5,
+          url: "https://www.coursera.org/learn/algorithms-part1/",
+          timeSpent: 1,
+          lastAccessed: new Date().toISOString()
+        },
+        {
+          id: 2,
+          title: "Algorithms Part 2",
+          platform: "Coursera",
+          completion: 0,
+          url: "https://www.coursera.org/learn/algorithms-part2/",
+          timeSpent: 0,
+          lastAccessed: new Date().toISOString()
+        }
+      ],
+      practice: [
+        {
+          id: 1,
+          title: "LeetCode Problems",
+          type: "Problem Solving",
+          completion: 5,
+          timeSpent: 300,
+          url : "https://leetcode.com/problemset/",
+          lastWorked: new Date().toISOString()
+        },
+        {
+          id: 2,
+          title: "Strivers A2Z DSA",
+          type: "Problem Solving",
+          completion: 0,
+          timeSpent: 0,
+          url : "https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2",
+          lastWorked: new Date().toISOString()
+        },
+        {
+          id: 3,
+          title: "ByteByteGo",
+          type: "Problem Solving",
+          completion: 50,
+          timeSpent: 240,
+          url : "https://bytebytego.com/courses/coding-patterns",
+          lastWorked: new Date().toISOString()
+        }
+      ]
+    },
+    "Java": {
+      roadmapUrl: "https://roadmap.sh/java",
+      notionUrl: "https://www.notion.so/Java-1046b4d3ddf080d8b580e8cc2a928249",
+      books : [
+        {
+        id: 1,
+        title: "Head First Java",
+        author: "O Rielly",
+        completion: 50,
+        timeSpent: 240,
+        lastRead: new Date().toISOString()
+        },
+        {
+          id: 2,
+          title: "Concurrency in Java",
+          author: "Brian Goetz",
+          completion: 10,
+          timeSpent: 10,
+          lastRead: new Date().toISOString()
+        }
+      ],
+      courses: [
+        {
+          id: 1,
+          title: "Know Your Java Web",
+          platform: "Website",
+          completion: 5,
+          url: "https://dev.java/learn/",
+          timeSpent: 1,
+          lastAccessed: new Date().toISOString()
+        },
+        {
+          id: 2,
+          title: "Know Your Java Video",
+          platform: "Youtube",
+          completion: 100,
+          url: "https://www.youtube.com/watch?v=q2T9NlROLqw",
+          timeSpent: 2,
+          lastAccessed: new Date().toISOString()
+        },
+        {
+          id: 3,
+          title: "Java Programming and Software Engineering Fundamentals",
+          platform: "Youtube",
+          completion: 50,
+          url: "https://www.youtube.com/@Java.Brains",
+          timeSpent: 300,
+          lastAccessed: new Date().toISOString()
+        }
+      ],
+      practice: [
+        {
+          id: 1,
+          title: "Practice Java Streams",
+          type: "Coding",
+          completion: 80,
+          timeSpent: 10,
+          url : "https://stackify.com/streams-guide-java-8/",
+          lastWorked: new Date().toISOString()
+        },
+        {
+          id: 2,
+          title: "Placeholder for Java Practice",
+          type: "Coding",
+          completion: 0,
+          timeSpent: 0,
+          url : "https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2",
+          lastWorked: new Date().toISOString()
+        }
+      ]
     }
   },
   
