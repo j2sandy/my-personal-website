@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { navigationItems, getPageDescription } from '../data/navigation';
+import { navigationItems, getPageDescription } from '../data/navigationItems';
 import { fetchShloka } from '../services/shlokaService';
 import TypewriterText from './TypewriterText';
 
