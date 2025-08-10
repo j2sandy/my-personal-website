@@ -1,54 +1,53 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
-import { navigation } from './data/navigationItems';
-
-// Import your page components
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import LearningPage from './pages/LearningPage';
-import WellnessPage from './pages/WellnessPage';
-import CalendarPage from './pages/Calendar';
-import Meditation from './pages/wellness/Meditation';
-import Fitness from './pages/wellness/Fitness';
-import Nutrition from './pages/wellness/Nutrition';
-import MentalHealth from './pages/wellness/MentalHealth';
+import ProjectsPage from './pages/ProjectsPage';
+import BlogPage from './pages/BlogPage';
+import WellnessPage from './pages/WellnessPage'; // This page now has tabs for pillars
+import { useTheme } from './hooks/useTheme';
+import { navigationItems } from './data/navigation';
 
-export default function App() {
-  const [darkMode, setDarkMode] = useState(false);
+export default function PersonalWebsite() {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { darkMode, toggleDarkMode } = useTheme();
 
-  const toggleDarkMode = () => setDarkMode((prev) => !prev);
+  const renderPage = () => {
+    const pageProps = { darkMode };
+
+    switch (currentPage) {
+      case 'home':
+        return <HomePage {...pageProps} onPageChange={setCurrentPage} />;
+      case 'learning':
+        return <LearningPage {...pageProps} />;
+      case 'projects':
+        return <ProjectsPage {...pageProps} />;
+      case 'blog':
+        return <BlogPage {...pageProps} />;
+      case 'wellness':
+        return <WellnessPage {...pageProps} />;  // WellnessPage internally handles tabs
+      default:
+        return <HomePage {...pageProps} onPageChange={setCurrentPage} />;
+    }
+  };
 
   return (
-    <Router>
-      <div className={darkMode ? 'dark bg-gray-900 text-white min-h-screen' : 'bg-white text-gray-900 min-h-screen'}>
-        
-        {/* Navigation */}
-        <Navigation
-          navigation={navigation}
-          darkMode={darkMode}
-          toggleDarkMode={toggleDarkMode}
-        />
+    <div className="min-h-screen">
+      <Navigation
+        navigation={navigationItems}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
 
-        {/* Main Content */}
-        <div className="pt-16 px-4 max-w-7xl mx-auto">
-          <Routes>
-            {/* Main Pages */}
-            <Route path="/" element={<Home />} />
-            <Route path="/learning" element={<Learning />} />
-            <Route path="/wellness" element={<Wellness />} />
-            <Route path="/calendar" element={<CalendarPage />} />
+      <div className="pt-16">{renderPage()}</div>
 
-            {/* Wellness Subpages */}
-            <Route path="/wellness/meditation" element={<Meditation />} />
-            <Route path="/wellness/fitness" element={<Fitness />} />
-            <Route path="/wellness/nutrition" element={<Nutrition />} />
-            <Route path="/wellness/mental-health" element={<MentalHealth />} />
-
-            {/* 404 Fallback */}
-            <Route path="*" element={<h1>Page Not Found</h1>} />
-          </Routes>
-        </div>
-      </div>
-    </Router>
+      <Footer darkMode={darkMode} />
+    </div>
   );
 }
