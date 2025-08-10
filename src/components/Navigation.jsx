@@ -1,14 +1,15 @@
 import { Menu, X, Moon, Sun, FileText } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Navigation({
   navigation,
-  currentPage,
-  setCurrentPage,
   mobileMenuOpen,
   setMobileMenuOpen,
   darkMode,
   toggleDarkMode
 }) {
+  const location = useLocation();
+
   return (
     <nav className={`shadow-lg fixed top-0 w-full z-50 transition-colors duration-300 ${
       darkMode ? 'bg-gray-900 border-b border-gray-700' : 'bg-white'
@@ -25,12 +26,13 @@ export default function Navigation({
           <div className="hidden md:flex space-x-8 items-center">
             {navigation.map((item) => {
               const Icon = item.icon;
+              const isActive = location.pathname === item.path;
               return (
-                <button
+                <Link
                   key={item.id}
-                  onClick={() => setCurrentPage(item.id)}
+                  to={item.path}
                   className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
-                    currentPage === item.id
+                    isActive
                       ? darkMode 
                         ? 'text-blue-400 bg-blue-900' 
                         : 'text-blue-600 bg-blue-50'
@@ -41,7 +43,7 @@ export default function Navigation({
                 >
                   <Icon className="w-4 h-4" />
                   <span>{item.name}</span>
-                </button>
+                </Link>
               );
             })}
             
@@ -50,11 +52,7 @@ export default function Navigation({
               href="https://j2sandy.github.io/my-personal-website/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
-                darkMode
-                  ? 'bg-blue-600 text-white hover:bg-blue-700'
-                  : 'bg-blue-600 text-white hover:bg-blue-700'
-              }`}
+              className="flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
             >
               <FileText className="w-4 h-4" />
               <span>Resume</span>
@@ -123,15 +121,14 @@ export default function Navigation({
             }`}>
               {navigation.map((item) => {
                 const Icon = item.icon;
+                const isActive = location.pathname === item.path;
                 return (
-                  <button
+                  <Link
                     key={item.id}
-                    onClick={() => {
-                      setCurrentPage(item.id);
-                      setMobileMenuOpen(false);
-                    }}
+                    to={item.path}
+                    onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center space-x-2 w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
-                      currentPage === item.id
+                      isActive
                         ? darkMode 
                           ? 'text-blue-400 bg-blue-900' 
                           : 'text-blue-600 bg-blue-50'
@@ -142,17 +139,17 @@ export default function Navigation({
                   >
                     <Icon className="w-5 h-5" />
                     <span>{item.name}</span>
-                  </button>
+                  </Link>
                 );
               })}
 
-              {/* Mobile Resume Button - Full Width */}
+              {/* Mobile Resume Button */}
               <a
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-center space-x-2 w-full px-3 py-3 mt-4 rounded-md text-base font-medium transition-colors duration-300 ${
+                className={`flex items-center justify-center space-x-2 w-full px-3 py-3 mt-4 rounded-md text-base font-medium ${
                   darkMode
                     ? 'bg-blue-600 text-white hover:bg-blue-700'
                     : 'bg-blue-600 text-white hover:bg-blue-700'
