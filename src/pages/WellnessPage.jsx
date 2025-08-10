@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CalendarPage from '../wellness/CalendarPage';
+import CalendarPage from './wellness/CalendarPage';
 import { wellnessData } from '../data/wellnessData';
 
 const tabs = [
