@@ -27,7 +27,7 @@ export default function HomePage({ darkMode, onPageChange }) {
         </div>
         <h1 className={`text-5xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Nitin Shandilya</h1>
         <p className={`text-xl mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-          Creative Developer & Lifelong Learner
+          Experienced Full Stack Engineer, Newbie into Wellness and Mindful Living
         </p>
         <p className={`text-lg max-w-2xl mx-auto leading-relaxed ${darkMode ? 'text-gray-400' : 'text-gray-700'}`}>
           Welcome to my digital space! I'm passionate about technology, continuous learning, 
