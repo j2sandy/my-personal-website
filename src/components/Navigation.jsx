@@ -1,167 +1,122 @@
-import { Menu, X, Moon, Sun, FileText } from 'lucide-react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
-export default function Navigation({
-  navigation,
-  mobileMenuOpen,
-  setMobileMenuOpen,
-  darkMode,
-  toggleDarkMode
-}) {
+export default function Navigation({ navigation, darkMode, toggleDarkMode }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
   const location = useLocation();
 
+  const toggleDropdown = (id) => {
+    setOpenDropdown(openDropdown === id ? null : id);
+  };
+
   return (
-    <nav className={`shadow-lg fixed top-0 w-full z-50 transition-colors duration-300 ${
-      darkMode ? 'bg-gray-900 border-b border-gray-700' : 'bg-white'
-    }`}>
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <span className={`text-2xl font-bold transition-colors duration-300 ${
-              darkMode ? 'text-white' : 'text-gray-800'
-            }`}>NS</span>
-          </div>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8 items-center">
-            {navigation.map((item) => {
-              const Icon = item.icon;
-              const isActive = location.pathname === item.path;
-              return (
-                <Link
-                  key={item.id}
-                  to={item.path}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
-                    isActive
-                      ? darkMode 
-                        ? 'text-blue-400 bg-blue-900' 
-                        : 'text-blue-600 bg-blue-50'
-                      : darkMode
-                        ? 'text-gray-300 hover:text-blue-400 hover:bg-gray-800'
-                        : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{item.name}</span>
-                </Link>
-              );
-            })}
-            
-            {/* Resume Button */}
-            <a
-              href="https://j2sandy.github.io/my-personal-website/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
-            >
-              <FileText className="w-4 h-4" />
-              <span>Resume</span>
-            </a>
+    <nav className={`fixed top-0 left-0 w-full z-50 shadow-md ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+        
+        {/* Logo / Brand */}
+        <Link to="/" className="text-lg font-bold">
+          My Personal Website
+        </Link>
 
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className={`p-2 rounded-md transition-colors duration-300 ${
-                darkMode
-                  ? 'text-yellow-400 hover:bg-gray-800'
-                  : 'text-gray-600 hover:bg-gray-100'
-              }`}
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
-            {/* Mobile Resume Button */}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`p-2 rounded-md transition-colors duration-300 ${
-                darkMode
-                  ? 'text-blue-400 hover:text-blue-300 hover:bg-gray-800'
-                  : 'text-blue-600 hover:text-blue-700 hover:bg-gray-100'
-              }`}
-              aria-label="Download Resume"
-            >
-              <FileText className="w-5 h-5" />
-            </a>
-
-            {/* Mobile Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className={`p-2 rounded-md transition-colors duration-300 ${
-                darkMode
-                  ? 'text-yellow-400 hover:bg-gray-800'
-                  : 'text-gray-600 hover:bg-gray-100'
-              }`}
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-            
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`transition-colors duration-300 ${
-                darkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'
-              }`}
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="md:hidden">
-            <div className={`px-2 pt-2 pb-3 space-y-1 border-t transition-colors duration-300 ${
-              darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'
-            }`}>
-              {navigation.map((item) => {
-                const Icon = item.icon;
-                const isActive = location.pathname === item.path;
-                return (
-                  <Link
-                    key={item.id}
-                    to={item.path}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center space-x-2 w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
-                      isActive
-                        ? darkMode 
-                          ? 'text-blue-400 bg-blue-900' 
-                          : 'text-blue-600 bg-blue-50'
-                        : darkMode
-                          ? 'text-gray-300 hover:text-blue-400 hover:bg-gray-800'
-                          : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                    }`}
-                  >
-                    <Icon className="w-5 h-5" />
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
-
-              {/* Mobile Resume Button */}
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-center space-x-2 w-full px-3 py-3 mt-4 rounded-md text-base font-medium ${
-                  darkMode
-                    ? 'bg-blue-600 text-white hover:bg-blue-700'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
+        {/* Desktop Menu */}
+        <div className="hidden md:flex space-x-6">
+          {navigation.map((item) => (
+            <div key={item.id} className="relative group">
+              <Link
+                to={item.href}
+                className={`flex items-center space-x-1 hover:text-blue-500 ${
+                  location.pathname === item.href ? 'font-semibold' : ''
                 }`}
               >
-                <FileText className="w-5 h-5" />
-                <span>Download Resume</span>
-              </a>
+                <item.icon size={18} />
+                <span>{item.name}</span>
+                {item.subpages && <ChevronDown size={14} />}
+              </Link>
+
+              {/* Dropdown for Wellness */}
+              {item.subpages && (
+                <div className="absolute left-0 mt-2 hidden group-hover:block bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                  {item.subpages.map((sub) => (
+                    <Link
+                      key={sub.name}
+                      to={sub.href}
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      {sub.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          ))}
+
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={toggleDarkMode}
+            className="px-3 py-1 border rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+          >
+            {darkMode ? 'Light' : 'Dark'}
+          </button>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? <X /> : <Menu />}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className={`md:hidden px-4 pb-4 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+          {navigation.map((item) => (
+            <div key={item.id} className="border-b border-gray-200 dark:border-gray-700">
+              <div
+                className="flex items-center justify-between py-2 cursor-pointer"
+                onClick={() => item.subpages ? toggleDropdown(item.id) : setMobileMenuOpen(false)}
+              >
+                <Link
+                  to={item.href}
+                  className="flex items-center space-x-2"
+                >
+                  <item.icon size={18} />
+                  <span>{item.name}</span>
+                </Link>
+                {item.subpages && <ChevronDown size={14} />}
+              </div>
+
+              {/* Mobile Submenu */}
+              {item.subpages && openDropdown === item.id && (
+                <div className="pl-6">
+                  {item.subpages.map((sub) => (
+                    <Link
+                      key={sub.name}
+                      to={sub.href}
+                      className="block py-1"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {sub.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={toggleDarkMode}
+            className="mt-4 w-full px-3 py-2 border rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+          >
+            {darkMode ? 'Light' : 'Dark'}
+          </button>
+        </div>
+      )}
     </nav>
   );
-}
+                  }
+                    
