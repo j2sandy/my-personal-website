@@ -1,14 +1,24 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
-export default function Navigation({ navigation, darkMode, toggleDarkMode }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export default function Navigation({ 
+  navigation, 
+  currentPage, 
+  setCurrentPage, 
+  mobileMenuOpen, 
+  setMobileMenuOpen, 
+  darkMode, 
+  toggleDarkMode 
+}) {
   const [openDropdown, setOpenDropdown] = useState(null);
-  const location = useLocation();
 
   const toggleDropdown = (id) => {
     setOpenDropdown(openDropdown === id ? null : id);
+  };
+
+  const handleNavClick = (pageId) => {
+    setCurrentPage(pageId);
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -16,36 +26,39 @@ export default function Navigation({ navigation, darkMode, toggleDarkMode }) {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
         
         {/* Logo / Brand */}
-        <Link to="/" className="text-lg font-bold">
+        <button 
+          onClick={() => handleNavClick('home')} 
+          className="text-lg font-bold hover:text-blue-500"
+        >
           My Personal Website
-        </Link>
+        </button>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6">
           {navigation.map((item) => (
             <div key={item.id} className="relative group">
-              <Link
-                to={item.href}
+              <button
+                onClick={() => handleNavClick(item.id)}
                 className={`flex items-center space-x-1 hover:text-blue-500 ${
-                  location.pathname === item.href ? 'font-semibold' : ''
+                  currentPage === item.id ? 'font-semibold text-blue-500' : ''
                 }`}
               >
-                <item.icon size={18} />
+                {item.icon && <item.icon size={18} />}
                 <span>{item.name}</span>
                 {item.subpages && <ChevronDown size={14} />}
-              </Link>
+              </button>
 
               {/* Dropdown for Wellness */}
               {item.subpages && (
                 <div className="absolute left-0 mt-2 hidden group-hover:block bg-white dark:bg-gray-800 rounded-lg shadow-lg">
                   {item.subpages.map((sub) => (
-                    <Link
+                    <button
                       key={sub.name}
-                      to={sub.href}
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      onClick={() => handleNavClick(sub.id)}
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
                       {sub.name}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               )}
@@ -77,15 +90,17 @@ export default function Navigation({ navigation, darkMode, toggleDarkMode }) {
             <div key={item.id} className="border-b border-gray-200 dark:border-gray-700">
               <div
                 className="flex items-center justify-between py-2 cursor-pointer"
-                onClick={() => item.subpages ? toggleDropdown(item.id) : setMobileMenuOpen(false)}
+                onClick={() => item.subpages ? toggleDropdown(item.id) : handleNavClick(item.id)}
               >
-                <Link
-                  to={item.href}
-                  className="flex items-center space-x-2"
+                <button
+                  onClick={() => !item.subpages && handleNavClick(item.id)}
+                  className={`flex items-center space-x-2 ${
+                    currentPage === item.id ? 'font-semibold text-blue-500' : ''
+                  }`}
                 >
-                  <item.icon size={18} />
+                  {item.icon && <item.icon size={18} />}
                   <span>{item.name}</span>
-                </Link>
+                </button>
                 {item.subpages && <ChevronDown size={14} />}
               </div>
 
@@ -93,14 +108,13 @@ export default function Navigation({ navigation, darkMode, toggleDarkMode }) {
               {item.subpages && openDropdown === item.id && (
                 <div className="pl-6">
                   {item.subpages.map((sub) => (
-                    <Link
+                    <button
                       key={sub.name}
-                      to={sub.href}
-                      className="block py-1"
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={() => handleNavClick(sub.id)}
+                      className="block w-full text-left py-1 hover:text-blue-500"
                     >
                       {sub.name}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               )}
@@ -118,5 +132,4 @@ export default function Navigation({ navigation, darkMode, toggleDarkMode }) {
       )}
     </nav>
   );
-                  }
-                    
+}
