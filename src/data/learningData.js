@@ -77,19 +77,49 @@ export const learningData = {
           url: "https://www.coursera.org/learn/ai-for-everyone",
           timeSpent: 6,
           lastAccessed: new Date().toISOString()
+        },
+        {
+          id: 2,
+          title: "Intro to ML",
+          platform: "Youtube",
+          completion: 0,
+          url: "https://www.youtube.com/watch?v=Bl4Feh_Mjvo&list=PLoROMvodv4rNyWOpJg_Yh4NSqI4Z4vOYy",
+          timeSpent: 0,
+          lastAccessed: new Date().toISOString()
+        },
+        {
+          id: 3,
+          title: "Advacnced ML",
+          platform: "Youtube",
+          completion: 0,
+          url: "https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv",
+          timeSpent: 0,
+          lastAccessed: new Date().toISOString()
         }
       ],
       
       practice: [
         {
           id: 1,
-          title: "Practice Quiz and Assignments",
+          title: "Data Science Projects",
           type: "Project",
           completion: 0,
           timeSpent: 0,
+          url: "https://platform.stratascratch.com/data-projects",
           lastWorked: new Date().toISOString()
         }
       ],
+      otherReferences: [
+        {
+          id: 1,
+          title: "AI/ML Roadmap",
+          type: "Roadmap",
+          completion: 0,
+          timeSpent: 0,
+          url: "https://ayoushasaservice.com/ai-journey",
+          lastWorked: new Date().toISOString()
+        }
+      ]
     },
     "DSA": {
       roadmapUrl: "https://roadmap.sh/datastructures-and-algorithms",
