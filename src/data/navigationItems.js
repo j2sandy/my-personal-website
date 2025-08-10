@@ -9,13 +9,7 @@ export const navigationItems = [
     id: 'wellness', 
     name: 'Wellness', 
     icon: Heart, 
-    href: '/wellness',
-    subpages: [
-      { name: 'Sleep', href: '/wellness/sleep' },
-      { name: 'Nutrition', href: '/wellness/nutrition' },
-      { name: 'Fitness', href: '/wellness/fitness' },
-      { name: 'Mindfulness', href: '/wellness/mindfulness' }
-    ]
+    href: '/wellness'
   },
 ];
 
