@@ -35,7 +35,7 @@ export default function Navigation({
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse"></div>
           </div>
           <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-extrabold">
-            My Personal Website
+            Nitin
           </span>
         </button>
 
