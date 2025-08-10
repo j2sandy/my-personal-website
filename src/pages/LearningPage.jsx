@@ -37,7 +37,8 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
     { id: 'books', label: 'Books', icon: Book },
     { id: 'courses', label: 'Courses', icon: Video },
     { id: 'practice', label: 'Practice', icon: Code },
-    { id: 'notes', label: 'My Notes', icon: FileText }
+    { id: 'notes', label: 'My Notes', icon: FileText },
+    { id: 'otherReferences', label: 'Other References', icon: ExternalLink }
   ];
 
   const renderLearningPath = () => {
@@ -193,6 +194,7 @@ const SkillDetailView = ({ skill, data, darkMode, onClose }) => {
       case 'books':
       case 'courses':
       case 'practice':
+      case 'otherReferences':
         return renderResourceList(activeTab);
       default:
         return renderLearningPath();
@@ -417,4 +419,4 @@ export default function LearningPage({ darkMode = false }) {
       )}
     </div>
   );
-}
+        }
