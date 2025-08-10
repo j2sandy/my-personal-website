@@ -4,9 +4,9 @@ import Navigation from './components/Navigation';
 import { navigation } from './data/navigationItems';
 
 // Import your page components
-import Home from './pages/Home';
-import Learning from './pages/Learning';
-import Wellness from './pages/Wellness';
+import HomePage from './pages/HomePage';
+import LearningPage from './pages/LearningPage';
+import WellnessPage from './pages/WellnessPage';
 import CalendarPage from './pages/Calendar';
 import Meditation from './pages/wellness/Meditation';
 import Fitness from './pages/wellness/Fitness';
