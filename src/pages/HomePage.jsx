@@ -60,7 +60,7 @@ export default function HomePage({ darkMode, onPageChange }) {
 
       {/* Shloka Section */}
       <div className={`py-12 px-6 border-t ${darkMode ? 'border-gray-700' : 'border-gray-300'}`}>
-        <h2 className={`text-2xl font-bold mb-6 text-center ${darkMode ? 'text-white' : 'text-gray-800'}`}>Daily Shloka</h2>
+        <h2 className={`text-2xl font-bold mb-6 text-center ${darkMode ? 'text-white' : 'text-gray-800'}`}>Shloka of the Day</h2>
 
         {shlokaData && (
           <div className="max-w-4xl mx-auto text-center">
