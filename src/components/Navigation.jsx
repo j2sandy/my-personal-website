@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Sun, Moon, Sparkles } from 'lucide-react';
 
 export default function Navigation({ 
   navigation, 
@@ -22,15 +22,21 @@ export default function Navigation({
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 shadow-md ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b ${darkMode ? 'bg-gray-900/90 border-gray-700 text-white' : 'bg-white/90 border-gray-200 text-gray-900'}`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
         
         {/* Logo / Brand */}
         <button 
           onClick={() => handleNavClick('home')} 
-          className="text-lg font-bold hover:text-blue-500"
+          className="flex items-center space-x-2 text-lg font-bold hover:text-blue-500 transition-colors duration-200"
         >
-          My Personal Website
+          <div className="relative">
+            <Sparkles className="w-7 h-7 text-blue-500" />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse"></div>
+          </div>
+          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-extrabold">
+            My Personal Website
+          </span>
         </button>
 
         {/* Desktop Menu */}
@@ -39,8 +45,8 @@ export default function Navigation({
             <div key={item.id} className="relative group">
               <button
                 onClick={() => handleNavClick(item.id)}
-                className={`flex items-center space-x-1 hover:text-blue-500 ${
-                  currentPage === item.id ? 'font-semibold text-blue-500' : ''
+                className={`flex items-center space-x-1 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 ${
+                  currentPage === item.id ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-semibold' : 'hover:text-blue-500'
                 }`}
               >
                 {item.icon && <item.icon size={18} />}
@@ -50,12 +56,12 @@ export default function Navigation({
 
               {/* Dropdown for Wellness */}
               {item.subpages && (
-                <div className="absolute left-0 mt-2 hidden group-hover:block bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                <div className="absolute left-0 mt-2 hidden group-hover:block bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 min-w-[180px]">
                   {item.subpages.map((sub) => (
                     <button
                       key={sub.name}
                       onClick={() => handleNavClick(sub.id)}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      className="block w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 first:rounded-t-xl last:rounded-b-xl transition-colors duration-200"
                     >
                       {sub.name}
                     </button>
@@ -68,18 +74,23 @@ export default function Navigation({
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
-            className="px-3 py-1 border rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 group"
+            title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           >
-            {darkMode ? 'Light' : 'Dark'}
+            {darkMode ? (
+              <Sun className="w-5 h-5 text-yellow-500 group-hover:rotate-12 transition-transform duration-200" />
+            ) : (
+              <Moon className="w-5 h-5 text-blue-500 group-hover:-rotate-12 transition-transform duration-200" />
+            )}
           </button>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden"
+          className="md:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? <X /> : <Menu />}
+          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
@@ -124,9 +135,19 @@ export default function Navigation({
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
-            className="mt-4 w-full px-3 py-2 border rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="mt-4 w-full flex items-center justify-center space-x-2 px-3 py-2 border rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
           >
-            {darkMode ? 'Light' : 'Dark'}
+            {darkMode ? (
+              <>
+                <Sun className="w-5 h-5 text-yellow-500" />
+                <span>Light Mode</span>
+              </>
+            ) : (
+              <>
+                <Moon className="w-5 h-5 text-blue-500" />
+                <span>Dark Mode</span>
+              </>
+            )}
           </button>
         </div>
       )}
