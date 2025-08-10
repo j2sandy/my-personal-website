@@ -7,7 +7,7 @@ import ProjectsPage from './pages/ProjectsPage';
 import BlogPage from './pages/BlogPage';
 import WellnessPage from './pages/WellnessPage'; // This page now has tabs for pillars
 import { useTheme } from './hooks/useTheme';
-import { navigationItems } from './data/navigation';
+import { navigationItems } from './data/navigationItems';
 
 export default function PersonalWebsite() {
   const [currentPage, setCurrentPage] = useState('home');
