@@ -75,54 +75,71 @@ const timelineData = [
   }
 ];
 
+const fadeInVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
+  }),
+};
+
 export default function JourneyTimeline() {
   return (
-    <div className="bg-gray-50 py-12">
-      <div className="relative max-w-5xl mx-auto">
-        {/* Vertical line */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-300"></div>
+    <div className="relative w-full max-w-5xl mx-auto px-4 py-16">
+      {/* Vertical line in the center */}
+      <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gray-300 h-full"></div>
 
-        <div className="space-y-12">
-          {timelineData.map((event, index) => {
-            const Icon = event.icon;
-            const isLeft = index % 2 === 0;
-            return (
-              <motion.div
-                key={event.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                viewport={{ once: true }}
-                className={`relative flex items-center ${
-                  isLeft ? "justify-start" : "justify-end"
+      <div className="space-y-12">
+        {timelineData.map((event, index) => {
+          const Icon = event.icon;
+          const isLeft = index % 2 === 0;
+
+          return (
+            <motion.div
+              key={event.id}
+              className={`relative flex items-center w-full ${
+                isLeft ? "justify-start" : "justify-end"
+              }`}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={fadeInVariant}
+            >
+              {/* Content box */}
+              <div
+                className={`bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 w-5/12 relative ${
+                  isLeft ? "text-right" : "text-left"
                 }`}
               >
-                {/* Content card */}
+                <h3 className="text-xl font-semibold">{event.title}</h3>
+                <p className="text-sm text-gray-500">{event.date}</p>
+                <p className="mt-2 text-gray-700 dark:text-gray-300">
+                  {event.description}
+                </p>
+                <p className="mt-1 text-sm text-gray-500 italic">
+                  {event.impact}
+                </p>
+
+                {/* Arrow pointer */}
                 <div
-                  className={`w-5/12 bg-white shadow-md rounded-lg p-6 relative z-10`}
-                >
-                  <div className="flex items-center mb-2">
-                    <Icon className="w-6 h-6 text-blue-500 mr-2" />
-                    <h3 className="text-lg font-semibold">{event.title}</h3>
-                  </div>
-                  <p className="text-gray-600 mb-2">{event.description}</p>
-                  <span className="text-sm text-gray-400">
-                    Impact: {event.impact}
-                  </span>
-                </div>
+                  className={`absolute top-6 ${
+                    isLeft
+                      ? "-right-3 border-l-[12px] border-l-white dark:border-l-gray-800 border-y-[12px] border-y-transparent"
+                      : "-left-3 border-r-[12px] border-r-white dark:border-r-gray-800 border-y-[12px] border-y-transparent"
+                  }`}
+                ></div>
+              </div>
 
-                {/* Date bubble */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-md z-20">
-                  {event.date}
-                </div>
-
-                {/* Dot on line */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-4 border-blue-500 rounded-full z-30"></div>
-              </motion.div>
-            );
-          })}
-        </div>
+              {/* Icon in the center line */}
+              <span className="absolute left-1/2 transform -translate-x-1/2 bg-blue-500 text-white rounded-full p-3 shadow-lg z-10">
+                <Icon size={20} />
+              </span>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );
-                }
+                           }
