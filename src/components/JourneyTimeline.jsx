@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
 import {
   Star,
   Heart,
@@ -82,7 +81,7 @@ export default function JourneyTimeline() {
       <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-gray-300 transform -translate-x-1/2"></div>
 
       <div className="max-w-5xl mx-auto">
-        {events.map((event, index) => {
+        {timelineData.map((event, index) => {
           const isLeft = index % 2 === 0;
           const Icon = event.icon;
           const dateFormatted = new Date(event.date).toLocaleDateString('en-US', {
