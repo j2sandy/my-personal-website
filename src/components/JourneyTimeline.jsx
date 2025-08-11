@@ -1,5 +1,5 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import {
   Star,
   Heart,
@@ -75,71 +75,92 @@ const timelineData = [
   }
 ];
 
-const fadeInVariant = {
-  hidden: { opacity: 0, y: 50 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
-  }),
-};
-
 export default function JourneyTimeline() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const section = document.getElementById('timeline-section');
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.8) {
+          setIsVisible(true);
+        }
+      }
+    };
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <div className="relative w-full max-w-5xl mx-auto px-4 py-16">
-      {/* Vertical line in the center */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gray-300 h-full"></div>
+    <div id="timeline-section" className="relative w-full flex justify-center py-16">
+      {/* Animated vertical wavy line */}
+      <svg
+        className="absolute top-0 bottom-0"
+        width="4"
+        height="100%"
+        viewBox="0 0 4 100"
+        preserveAspectRatio="none"
+      >
+        <motion.path
+          d="M2,0 Q3,25 2,50 Q1,75 2,100"
+          fill="transparent"
+          stroke="#4f46e5"
+          strokeWidth="4"
+          strokeLinecap="round"
+          animate={{
+            d: [
+              'M2,0 Q3,25 2,50 Q1,75 2,100',
+              'M2,0 Q1,25 2,50 Q3,75 2,100',
+              'M2,0 Q3,25 2,50 Q1,75 2,100'
+            ]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: 'easeInOut'
+          }}
+        />
+      </svg>
 
-      <div className="space-y-12">
-        {timelineData.map((event, index) => {
+      <div className="flex flex-col gap-16">
+        {timelineData.map((event) => {
           const Icon = event.icon;
-          const isLeft = index % 2 === 0;
-
           return (
             <motion.div
               key={event.id}
-              className={`relative flex items-center w-full ${
-                isLeft ? "justify-start" : "justify-end"
-              }`}
-              custom={index}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeInVariant}
+              className="relative flex gap-6 items-start"
+              initial={{ opacity: 0, x: -50 }}
+              animate={isVisible ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: event.id * 0.2 }}
             >
-              {/* Content box */}
-              <div
-                className={`bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 w-5/12 relative ${
-                  isLeft ? "text-right" : "text-left"
-                }`}
-              >
-                <h3 className="text-xl font-semibold">{event.title}</h3>
-                <p className="text-sm text-gray-500">{event.date}</p>
-                <p className="mt-2 text-gray-700 dark:text-gray-300">
-                  {event.description}
-                </p>
-                <p className="mt-1 text-sm text-gray-500 italic">
-                  {event.impact}
-                </p>
-
-                {/* Arrow pointer */}
-                <div
-                  className={`absolute top-6 ${
-                    isLeft
-                      ? "-right-3 border-l-[12px] border-l-white dark:border-l-gray-800 border-y-[12px] border-y-transparent"
-                      : "-left-3 border-r-[12px] border-r-white dark:border-r-gray-800 border-y-[12px] border-y-transparent"
-                  }`}
-                ></div>
+              {/* Timeline marker */}
+              <div className="relative z-10 w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white shadow-lg">
+                <Icon size={20} />
               </div>
 
-              {/* Icon in the center line */}
-              <span className="absolute left-1/2 transform -translate-x-1/2 bg-blue-500 text-white rounded-full p-3 shadow-lg z-10">
-                <Icon size={20} />
-              </span>
+              {/* Content */}
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md max-w-lg">
+                <div className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">
+                  {new Date(event.date).toLocaleDateString('en-US', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                  })}
+                </div>
+                <h3 className="text-lg font-semibold mb-1">{event.title}</h3>
+                <p className="text-gray-700 dark:text-gray-300">{event.description}</p>
+                {event.impact && (
+                  <p className="mt-2 text-indigo-600 dark:text-indigo-400 text-sm font-medium">
+                    Impact: {event.impact}
+                  </p>
+                )}
+              </div>
             </motion.div>
           );
         })}
       </div>
     </div>
   );
-                           }
+}
