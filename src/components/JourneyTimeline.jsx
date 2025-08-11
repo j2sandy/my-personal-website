@@ -20,7 +20,7 @@ const journeyEvents = [
     date: '2023-08-01',
     title: 'Started Cycling and Weight Training',
     type: 'physical',
-    status: 'ongoing',
+    status: 'current',
     description: 'Started cycling and weight training to improve physical fitness',
     icon: Dumbbell,
     impact: 'Weight control, increased strength, and endurance'
@@ -30,7 +30,7 @@ const journeyEvents = [
     date: '2023-09-01',
     title: 'Started tracking health data',
     type: 'physical',
-    status: 'ongoing',
+    status: 'current',
     description: 'Gained insights into health metrics like heart rate, sleep, and activity levels',
     icon: Heart,
     impact: 'Motivation to maintain healthy habits and track progress'
