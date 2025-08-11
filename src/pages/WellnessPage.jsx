@@ -1,6 +1,6 @@
 // pages/WellnessPage.jsx
 import React, { useState } from 'react';
-import { Heart, ChevronRight, Sparkles, X, TrendingUp, Calendar, Target, BookOpen, ArrowRight } from 'lucide-react';
+import { Heart, ChevronRight, Sparkles, X, TrendingUp, Target, BookOpen, ArrowRight } from 'lucide-react';
 import { wellnessPillars } from '../data/wellnessData';
 import { knowledgeCatalogData } from '../data/knowledgeData';
 import JourneyTimeline from '../components/JourneyTimeline';
