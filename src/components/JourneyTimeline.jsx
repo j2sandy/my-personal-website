@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  Calendar, 
+import {
   CheckCircle, 
   Clock, 
   Target, 
@@ -9,7 +8,6 @@ import {
   MapPin,
   Star,
   TrendingUp,
-  Award,
   Heart,
   Brain,
   Dumbbell,
