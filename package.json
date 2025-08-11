@@ -13,7 +13,8 @@
     "react-router-dom": "^6.23.0",
     "react-big-calendar": "^1.8.6",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "framer-motion": "^11.2.6"
   },
   "scripts": {
     "start": "react-scripts start",
