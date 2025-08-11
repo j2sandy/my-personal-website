@@ -36,11 +36,15 @@ export default function WellnessPage({ darkMode }) {
           </div>
           <h1 className={`text-4xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-              Wellness Journey
+              Wellness Centre
             </span>
           </h1>
           <p className={`text-lg max-w-2xl mx-auto leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Discover the five essential pillars of wellness for a balanced, fulfilling life.
+            Achieving holistic well-being is not a destination, but a continuous journey.
+            These wellness pillars work in harmony to enhance physical, mental, and emotional health.
+            Physical activity with a stressed mind can lead to burnout, while a calm mind without movement can stagnate growth.
+            Hence the key to well-being is balance.
+            Explore each pillar to discover how they contribute to a healthier, happier you.
           </p>
         </div>
 
@@ -333,4 +337,4 @@ export default function WellnessPage({ darkMode }) {
       </div>
     </div>
   );
-}
+                  }
