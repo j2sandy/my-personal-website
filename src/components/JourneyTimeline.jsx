@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { 
+  Calendar, 
   CheckCircle, 
   Clock, 
   Target, 
@@ -8,6 +9,7 @@ import {
   MapPin,
   Star,
   TrendingUp,
+  Award,
   Heart,
   Brain,
   Dumbbell,
@@ -319,7 +321,7 @@ export default function JourneyTimeline({ darkMode = false }) {
             <h2 className={`text-2xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
               Timeline View
             </h2>
-            <div className="space-y-4 max-h-96 overflow-y-auto">
+            <div className="space-y-4 overflow-y-auto" style={{ height: '480px' }}>
               {journeyEvents.map((event, index) => {
                 const StatusIcon = statusConfig[event.status].icon;
                 const EventIcon = event.icon;
@@ -405,4 +407,4 @@ export default function JourneyTimeline({ darkMode = false }) {
       </div>
     </div>
   );
-                    }
+    }
