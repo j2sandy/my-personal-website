@@ -36,47 +36,73 @@ export default function JourneyTimeline() {
                       <div className="flex-1 pr-4">
                         {/* Icon and Title */}
                         <div className="flex items-center mb-4">
-                      <div className={`p-2 rounded-full mr-3 ${
-                        item.type === 'physical' ? 'bg-blue-100 dark:bg-blue-900' :
-                        item.type === 'learning' ? 'bg-green-100 dark:bg-green-900' :
-                        item.type === 'wellness' ? 'bg-pink-100 dark:bg-pink-900' :
-                        'bg-yellow-100 dark:bg-yellow-900'
-                      }`}>
-                        <Icon size={20} className={`${
-                          item.type === 'physical' ? 'text-blue-600 dark:text-blue-300' :
-                          item.type === 'learning' ? 'text-green-600 dark:text-green-300' :
-                          item.type === 'wellness' ? 'text-pink-600 dark:text-pink-300' :
-                          'text-yellow-600 dark:text-yellow-300'
-                        }`} />
+                          <div className={`p-2 rounded-full mr-3 ${
+                            item.type === 'physical' ? 'bg-blue-100 dark:bg-blue-900' :
+                            item.type === 'learning' ? 'bg-green-100 dark:bg-green-900' :
+                            item.type === 'wellness' ? 'bg-pink-100 dark:bg-pink-900' :
+                            'bg-yellow-100 dark:bg-yellow-900'
+                          }`}>
+                            <Icon size={20} className={`${
+                              item.type === 'physical' ? 'text-blue-600 dark:text-blue-300' :
+                              item.type === 'learning' ? 'text-green-600 dark:text-green-300' :
+                              item.type === 'wellness' ? 'text-pink-600 dark:text-pink-300' :
+                              'text-yellow-600 dark:text-yellow-300'
+                            }`} />
+                          </div>
+                          <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                            {item.title}
+                          </h3>
+                        </div>
+                        
+                        {/* Description */}
+                        <p className="text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
+                          {item.description}
+                        </p>
+                        
+                        {/* Status Badge */}
+                        {item.status && (
+                          <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-2 ${
+                            item.status === 'ongoing' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                            item.status === 'completed' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                            item.status === 'paused' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
+                            'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
+                          }`}>
+                            {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
+                          </div>
+                        )}
+                        
+                        {/* Impact */}
+                        {item.impact && (
+                          <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+                            <span className="font-medium not-italic">Impact:</span> {item.impact}
+                          </p>
+                        )}
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                        {item.title}
-                      </h3>
+
+                      {/* Right side - Date */}
+                      <div className="text-center flex-shrink-0 ml-4">
+                        {(() => {
+                          const [year, month, day] = item.date.split('-');
+                          const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                          const monthName = monthNames[parseInt(month) - 1];
+                          
+                          return (
+                            <>
+                              <div className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                                {monthName}
+                              </div>
+                              <div className="text-3xl font-bold text-gray-900 dark:text-white leading-none">
+                                {day}
+                              </div>
+                              <div className="text-sm text-gray-500 dark:text-gray-400">
+                                {year}
+                              </div>
+                            </>
+                          );
+                        })()}
+                      </div>
                     </div>
-                    
-                    {/* Description */}
-                    <p className="text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
-                      {item.description}
-                    </p>
-                    
-                    {/* Status Badge */}
-                    {item.status && (
-                      <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-2 ${
-                        item.status === 'ongoing' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
-                        item.status === 'completed' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
-                        item.status === 'paused' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
-                        'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
-                      }`}>
-                        {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
-                      </div>
-                    )}
-                    
-                    {/* Impact */}
-                    {item.impact && (
-                      <p className="text-sm text-gray-500 dark:text-gray-400 italic">
-                        <span className="font-medium not-italic">Impact:</span> {item.impact}
-                      </p>
-                    )}
 
                     {/* Arrow pointing to timeline */}
                     <div className={`absolute top-8 ${isEven ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'}`}>
@@ -94,4 +120,4 @@ export default function JourneyTimeline() {
       </div>
     </div>
   );
-}
+                        }
