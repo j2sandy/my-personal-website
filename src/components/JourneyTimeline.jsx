@@ -7,7 +7,7 @@ export default function JourneyTimeline() {
       {/* Heading */}
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Journey So Far !!!!!!!
+          Journey So Far!!!
         </h2>
       </div>
 
@@ -31,32 +31,11 @@ export default function JourneyTimeline() {
                 {/* Content Card */}
                 <div className={`w-5/12 ${isEven ? 'pr-8' : 'pl-8'}`}>
                   <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 relative">
-                    {/* Date in top right corner of card */}
-                    <div className="absolute top-4 right-4 text-center">
-                      {(() => {
-                        const [year, month, day] = item.date.split('-');
-                        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                                           'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                        const monthName = monthNames[parseInt(month) - 1];
-                        
-                        return (
-                          <>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-                              {monthName}
-                            </div>
-                            <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                              {day}
-                            </div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400">
-                              {year}
-                            </div>
-                          </>
-                        );
-                      })()}
-                    </div>
-
-                    {/* Icon and Title */}
-                    <div className="flex items-center mb-4 pr-16">
+                    <div className="flex items-start justify-between">
+                      {/* Left side content */}
+                      <div className="flex-1 pr-4">
+                        {/* Icon and Title */}
+                        <div className="flex items-center mb-4">
                       <div className={`p-2 rounded-full mr-3 ${
                         item.type === 'physical' ? 'bg-blue-100 dark:bg-blue-900' :
                         item.type === 'learning' ? 'bg-green-100 dark:bg-green-900' :
@@ -115,4 +94,4 @@ export default function JourneyTimeline() {
       </div>
     </div>
   );
-}
+                        }
