@@ -291,7 +291,7 @@ export default function LearningPage({ darkMode = false }) {
           }`}>Learning Journey</h1>
           <p className={`text-lg transition-colors duration-300 ${
             darkMode ? 'text-gray-400' : 'text-gray-600'
-          }`}>Track your progress across skills and technologies</p>
+          }`}>Track my progress across skills and technologies</p>
         </div>
         
         <div className="max-w-6xl mx-auto">
@@ -304,7 +304,7 @@ export default function LearningPage({ darkMode = false }) {
             }`}>🎯 Current Focus</h2>
             <p className={`text-sm mb-6 transition-colors duration-300 ${
               darkMode ? 'text-gray-400' : 'text-gray-600'
-            }`}>Your active learning priorities</p>
+            }`}>My active learning priorities</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {learningData.currentFocus.map((item, index) => (
                 <button
